@@ -1,0 +1,71 @@
+import java.awt.event.ActionEvent ;
+import java.awt.event.ActionListener ;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+class Start extends JPanel{
+	private JButton GButton ;
+	private JButton DButton ;
+	private JButton RButton ;
+	private JButton SButton ;
+	private JButton QButton ;
+	private JLabel GName ;
+	private Main_Frame win ;
+
+	public Start(Main_Frame win){
+			this.win = win ;
+			setLayout(null) ;
+
+			GName = new JLabel("Game Name") ;
+			GName.setBounds(235, 50, 150, 20) ;
+			add(GName) ;
+
+			GButton = new JButton("Game Start") ;
+			GButton.setSize(150, 20) ;
+			GButton.setLocation(200, 240) ;
+			add(GButton) ;
+
+			DButton = new JButton("Game Description") ;
+			DButton.setSize(150, 20) ;
+			DButton.setLocation(200, 280) ;
+			add(DButton) ;
+			
+			RButton = new JButton("Record") ;
+			RButton.setSize(150, 20) ;
+			RButton.setLocation(200, 320) ;
+			add(RButton) ;
+			
+			SButton = new JButton("Reset") ;
+			SButton.setSize(150, 20) ;
+			SButton.setLocation(200, 360) ;
+			add(SButton) ;
+			
+			QButton = new JButton("Quit") ;
+			QButton.setSize(150, 20) ;
+			QButton.setLocation(200, 400) ;
+			add(QButton) ;
+
+			GButton.addActionListener(new MyActionListener()) ;
+			DButton.addActionListener(new MyActionListener()) ;
+			RButton.addActionListener(new MyActionListener()) ;
+			SButton.addActionListener(new MyActionListener()) ;
+			QButton.addActionListener(new MyActionListener()) ;
+	}
+
+	class MyActionListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+					JButton btn = (JButton) e.getSource();
+					if(btn.getText().equals("Game Start")) win.change("Game") ;
+					else if(btn.getText().equals("Game Description")) win.change("Desc") ;
+					else if(btn.getText().equals("Record")) win.change("Record") ;
+					else if(btn.getText().equals("Reset")) win.change("Reset") ;
+					else win.change("Quit") ;
+			}
+	}
+}	
