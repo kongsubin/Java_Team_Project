@@ -63,7 +63,10 @@ class Start extends JPanel{
 	class MyActionListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 					JButton btn = (JButton) e.getSource();
-					if(btn.getText().equals("Game Start")) win.change("Game") ;
+					if(btn.getText().equals("Game Start")) {
+						win.game = new Game(win) ;
+						win.change("Game"); // 화면을 바꿔주는..
+					}
 					else if(btn.getText().equals("Game Description")) win.change("Desc") ;
 					else if(btn.getText().equals("Record")) win.change("Record") ;
 					else if(btn.getText().equals("Reset"))

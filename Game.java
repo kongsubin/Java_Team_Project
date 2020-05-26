@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 class Game extends JPanel{
 	private JButton jButton ;
 	private Main_Frame win ;
+	private RunGame running;
 
 	public Game(Main_Frame win){
 			this.win = win ;
@@ -23,10 +24,12 @@ class Game extends JPanel{
 			add(jButton) ;
 
 			jButton.addActionListener(new MyActionListener()) ;
+			running = new RunGame();
 	}
 
 	class MyActionListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
+					running.kill();
 					win.change("Start") ;
 			}
 	}
