@@ -11,11 +11,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JDialog ;
 
-class sDialog extends JDialog{
+class qDialog extends JDialog{
 	private JButton ok ;
 	private JButton no ;
 	
-	public sDialog(JFrame win, String title)
+	public qDialog(JFrame win, String title)
 	{
 		super(win, title) ;
 		setLayout(new FlowLayout()) ;
@@ -26,17 +26,18 @@ class sDialog extends JDialog{
 		setSize(200, 100) ;
 		setLocationRelativeTo(win);
 
-		ok.addActionListener(new ActionListener() {
+		ok.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				setVisible(false) ; // reset record
+				setVisible(false) ;
+				System.exit(0) ;
 			}
-		}) ;
+		});
 
-		no.addActionListener(new ActionListener() {
+		no.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				setVisible(false) ; // reset record
+				setVisible(false) ;
 			}
-		}) ;
+		});
 	}
 }
 		

@@ -17,6 +17,8 @@ class Start extends JPanel{
 	private JButton QButton ;
 	private JLabel GName ;
 	private Main_Frame win ;
+	private sDialog reset ;
+	private qDialog quit ;
 
 	public Start(Main_Frame win){
 			this.win = win ;
@@ -64,8 +66,16 @@ class Start extends JPanel{
 					if(btn.getText().equals("Game Start")) win.change("Game") ;
 					else if(btn.getText().equals("Game Description")) win.change("Desc") ;
 					else if(btn.getText().equals("Record")) win.change("Record") ;
-					else if(btn.getText().equals("Reset")) win.change("Reset") ;
-					else win.change("Quit") ;
+					else if(btn.getText().equals("Reset"))
+					{
+						reset = new sDialog(win, "Testing reset") ;
+						reset.setVisible(true) ;
+					}
+					else
+					{
+						quit = new qDialog(win, "Testing quit") ;
+						quit.setVisible(true) ;
+					}
 			}
 	}
 }	

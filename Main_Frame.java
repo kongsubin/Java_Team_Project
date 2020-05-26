@@ -38,6 +38,7 @@ class Main_Frame extends JFrame{
 			revalidate() ;
 			repaint() ;
 		}
+		/*
 		else if(PName.equals("Reset"))
 		{
 			getContentPane().removeAll() ;
@@ -52,5 +53,6 @@ class Main_Frame extends JFrame{
 			revalidate() ;
 			repaint() ;
 		}
+		*/
 	}
 }

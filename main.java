@@ -10,8 +10,8 @@ public class main{
 			win.game = new Game(win) ;
 			win.desc = new Desc(win) ;
 			win.record = new Record(win) ;
-			win.reset = new Reset(win) ;
-			win.quit = new Quit(win) ;
+			// win.reset = new Reset(win) ;
+			// win.quit = new Quit(win) ;
 			
 			win.add(win.start) ;
 			win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE) ;
