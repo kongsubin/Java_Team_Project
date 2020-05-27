@@ -1,4 +1,5 @@
-class RunGame implements Runnable{
+package thread;
+public class RunGame implements Runnable{
 	Thread th; 
 
 	public RunGame(){

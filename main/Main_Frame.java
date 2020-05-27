@@ -1,12 +1,17 @@
+package main;
 import javax.swing.* ;
 
-class Main_Frame extends JFrame{
+import panel.Desc;
+import panel.Game;
+import panel.Record;
+import panel.Start;
+
+@SuppressWarnings("serial")
+public class Main_Frame extends JFrame{
 	public Start start = null ;
 	public Game game = null ;
 	public Desc desc = null ;
 	public Record record = null ;
-	public Reset reset = null ;
-	public Quit quit = null ;
 
 	public void change(String PName)
 	{
@@ -38,21 +43,5 @@ class Main_Frame extends JFrame{
 			revalidate() ;
 			repaint() ;
 		}
-		/*
-		else if(PName.equals("Reset"))
-		{
-			getContentPane().removeAll() ;
-			getContentPane().add(reset) ;
-			revalidate() ;
-			repaint() ;
-		}
-		else
-		{
-			getContentPane().removeAll() ;
-			getContentPane().add(quit) ;
-			revalidate() ;
-			repaint() ;
-		}
-		*/
 	}
 }

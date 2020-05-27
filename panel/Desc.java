@@ -1,19 +1,17 @@
+package panel;
 import java.awt.event.ActionEvent ;
 import java.awt.event.ActionListener ;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-class Quit extends JPanel{
+import main.Main_Frame;
+
+@SuppressWarnings("serial")
+public class Desc extends JPanel{
 	private JButton jButton ;
 	private Main_Frame win ;
 
-	public Quit(Main_Frame win){
+	public Desc(Main_Frame win){
 			this.win = win ;
 			setLayout(null) ;
 

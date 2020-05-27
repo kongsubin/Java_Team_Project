@@ -1,15 +1,14 @@
+package panel;
 import java.awt.event.ActionEvent ;
 import java.awt.event.ActionListener ;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-class Start extends JPanel{
+import main.Main_Frame;
+
+@SuppressWarnings("serial")
+public class Start extends JPanel{
 	private JButton GButton ;
 	private JButton DButton ;
 	private JButton RButton ;
@@ -62,8 +61,9 @@ class Start extends JPanel{
 
 	class MyActionListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-					JButton btn = (JButton) e.getSource();
-					if(btn.getText().equals("Game Start")) {
+					JButton btn = (JButton) e.getSource() ;
+					if(btn.getText().equals("Game Start")) 
+					{
 						win.game = new Game(win) ;
 						win.change("Game"); // 화면을 바꿔주는..
 					}
