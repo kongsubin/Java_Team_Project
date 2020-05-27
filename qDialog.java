@@ -3,14 +3,9 @@ import java.awt.event.ActionListener ;
 import java.awt.FlowLayout ;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JDialog ;
 
+@SuppressWarnings("serial")
 class qDialog extends JDialog{
 	private JButton ok ;
 	private JButton no ;
