@@ -65,7 +65,10 @@ class Start extends JPanel{
 						win.change("Game"); // 화면을 바꿔주는..
 					}
 					else if(btn.getText().equals("Game Description")) win.change("Desc") ;
-					else if(btn.getText().equals("Record")) win.change("Record") ;
+					else if(btn.getText().equals("Record")) {
+						win.change("Record") ;
+						win.record.show_record(); // 기록보기 버튼을 누를때마다 최신화된 파일을 보여줌.
+					}
 					else if(btn.getText().equals("Reset"))
 					{
 						reset = new sDialog(win, "Testing reset") ;
