@@ -1,11 +1,16 @@
+package panel;
+
 import java.awt.event.ActionEvent ;
 import java.awt.event.ActionListener ;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.Main_Frame;
+import manage.manage_data;
+
 @SuppressWarnings("serial")
-class Record extends JPanel{
+public class Record extends JPanel{
 	private JButton jButton ;
 	private Main_Frame win ;
 	private JLabel label;
