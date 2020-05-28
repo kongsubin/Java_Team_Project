@@ -1,4 +1,3 @@
-package panel;
 import java.awt.event.ActionEvent ;
 import java.awt.event.ActionListener ;
 import java.awt.FlowLayout ;
@@ -10,6 +9,7 @@ import javax.swing.JDialog ;
 class sDialog extends JDialog{
 	private JButton ok ;
 	private JButton no ;
+	private manage_data manage = new manage_data();
 	
 	public sDialog(JFrame win, String title)
 	{
@@ -24,6 +24,7 @@ class sDialog extends JDialog{
 
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
+				manage.delete_all_score(); // delete all score
 				setVisible(false) ; // reset record
 			}
 		}) ;
