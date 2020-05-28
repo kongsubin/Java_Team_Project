@@ -68,7 +68,10 @@ public class Start extends JPanel{
 						win.change("Game"); // 화면을 바꿔주는..
 					}
 					else if(btn.getText().equals("Game Description")) win.change("Desc") ;
-					else if(btn.getText().equals("Record")) win.change("Record") ;
+					else if(btn.getText().equals("Record")) {
+						win.change("Record") ;
+						win.record.show_record(); // show record on screen
+					}
 					else if(btn.getText().equals("Reset"))
 					{
 						reset = new sDialog(win, "Testing reset") ;
