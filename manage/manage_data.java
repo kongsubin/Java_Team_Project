@@ -21,7 +21,8 @@ public class manage_data {
 		
 	}
 	
-	public void store_list(int score) {
+	public void store_score(int score) { // store score to list
+		read_score(); // read score from file
 		
 		if(index < 10) {
 			score_list[index] = score;
@@ -32,17 +33,16 @@ public class manage_data {
 				score_list[9] = score;
 			}
 		}
+		
+		arrange_score(); // arrange score in score_list
+		store_file(); // store score into file
 	}
 	
 	
-	public void store_score() {
+	public void store_file() { // store score into file
 		int i;
 		String grade;
-		
-		read_score();
-		store_list();
-		arrange_score();
-		
+	
 		try {
 			outputStream = new PrintWriter(fileName);
 		}
@@ -58,7 +58,7 @@ public class manage_data {
 		outputStream.close();
 	}
 	
-	public void read_score( ) {
+	public void read_score( ) { // read score from file and store to list
 		int i, k = 0;
 		String[] file_score = new String[3];
 		
@@ -84,7 +84,7 @@ public class manage_data {
 		
 		
 	}
-	public void arrange_score() {
+	public void arrange_score() { // arnage score_list
 		int i, j,temp;
 		
 		for(i = 0; i < index; i++) {
@@ -98,7 +98,7 @@ public class manage_data {
 		}
 	}
 	
-	public String get_grade(int score) {
+	public String get_grade(int score) { // get grade
 		if(score >= 10000) {
 			return "A+";
 		}
@@ -119,7 +119,7 @@ public class manage_data {
 		}
 	}
 	
-	public String[] get_score() { 
+	public String[] get_score() { // store scores in line
 		String line[] = new String[10];
 		int i = 0;
 		try {
@@ -141,7 +141,7 @@ public class manage_data {
 		
 	}
 	
-	public void delete_all_score() { 
+	public void delete_all_score() { // delete all score
 		try {
 			outputStream = new PrintWriter(fileName);
 		}
