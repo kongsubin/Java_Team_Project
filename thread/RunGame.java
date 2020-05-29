@@ -1,4 +1,5 @@
 package thread;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
@@ -11,7 +12,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	Thread th; 
 	Main_Frame win;
 	Game game;
-	JPanel p;
+	JPanel p ;
 	int x = 0, y = 0; 
 	 
 	boolean KeyUp = false;

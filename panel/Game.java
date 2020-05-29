@@ -1,5 +1,4 @@
 package panel;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent ;
@@ -24,6 +23,12 @@ public class Game extends JPanel{
 	JPanel p;
 	int x = 0, y = 0;
 	private Clip clip ;
+	JPanel user = new JPanel() 	{
+		Image background = new ImageIcon(Game.class.getResource("../Image/User.png")).getImage();
+		public void paint(Graphics g) {
+				g.drawImage(background, 0, 0, null) ;	
+		} ;
+	} ;
 	
 	public Game(Main_Frame win){
 			this.win = win ;
@@ -39,19 +44,20 @@ public class Game extends JPanel{
 			add(jButton) ;
 			jButton.addActionListener(new MyActionListener()) ;
 			
+			/*
 			p = new JPanel();
 			p.setBounds(100, 100, 50, 50);
 			p.setBackground(Color.RED);
 			add(p);
-			
-			running = new RunGame(win, p);
+			*/
+			user.setBounds(100, 100, 100, 100);
+			add(user) ;
+			running = new RunGame(win, user);
 	}
 	
 	public void paintComponent(Graphics g)
 	{
 		g.drawImage(background, 0, 0, win) ;
-		setOpaque(false) ;
-		super.paintComponent(g);
 	}
 	
 	public void Play(File sound, boolean repeat)
