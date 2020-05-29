@@ -1,10 +1,11 @@
 package panel;
 import java.awt.event.ActionEvent ;
+import java.awt.Graphics ;
 import java.awt.event.ActionListener ;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import java.awt.Image ;
+import javax.swing.ImageIcon ;
 import main.Main_Frame;
 
 @SuppressWarnings("serial")
@@ -14,19 +15,15 @@ public class Start extends JPanel{
 	private JButton RButton ;
 	private JButton SButton ;
 	private JButton QButton ;
-	private JLabel GName ;
 	private Main_Frame win ;
 	private sDialog reset ;
 	private qDialog quit ;
-
+	private Image background = new ImageIcon(Start.class.getResource("../image/Main_image.jpg")).getImage() ;
+	
 	public Start(Main_Frame win){
 			this.win = win ;
 			setLayout(null) ;
-
-			GName = new JLabel("Game Name") ;
-			GName.setBounds(235, 50, 150, 20) ;
-			add(GName) ;
-
+			
 			GButton = new JButton("Game Start") ;
 			GButton.setSize(150, 20) ;
 			GButton.setLocation(200, 240) ;
@@ -58,6 +55,13 @@ public class Start extends JPanel{
 			SButton.addActionListener(new MyActionListener()) ;
 			QButton.addActionListener(new MyActionListener()) ;
 	}
+	
+	public void paintComponent(Graphics g)
+	{
+		g.drawImage(background, 0, 0, win) ;
+		setOpaque(false) ;
+		super.paintComponent(g);
+	}
 
 	class MyActionListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -74,12 +78,12 @@ public class Start extends JPanel{
 					}
 					else if(btn.getText().equals("Reset"))
 					{
-						reset = new sDialog(win, "Testing reset") ;
+						reset = new sDialog(win, "Reset") ;
 						reset.setVisible(true) ;
 					}
 					else
 					{
-						quit = new qDialog(win, "Testing quit") ;
+						quit = new qDialog(win, "Quit") ;
 						quit.setVisible(true) ;
 					}
 			}

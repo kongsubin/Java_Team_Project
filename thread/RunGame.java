@@ -1,5 +1,4 @@
 package thread;
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
@@ -7,6 +6,7 @@ import javax.swing.JPanel;
 import main.Main_Frame;
 import panel.Game;
 
+@SuppressWarnings("serial")
 public class RunGame extends JFrame implements Runnable, KeyListener{
 	Thread th; 
 	Main_Frame win;

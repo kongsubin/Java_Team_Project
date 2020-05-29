@@ -12,7 +12,7 @@ public class Main{
 	public static void main(String[] args){
 		Main_Frame win = new Main_Frame() ;
 
-		win.setTitle("Game Name") ;
+		win.setTitle("My Grade is..") ;
 		win.start = new Start(win) ;
 		win.desc = new Desc(win) ;
 		win.record = new Record(win) ;
