@@ -5,12 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-/* �� ������ ������ ������ ���Ͽ� �����ϱ������ ��ƾ (���� ���������� �ݺ�)
- * 1. read_score() �Լ��� ȣ���Ͽ� ���� ���Ͽ� �ִ� ������� ����Ʈ�� ����
- * 2. store_list() �Լ��� ȣ���Ͽ� ���ο� ������ ����Ʈ�� ����
- * 3. arrage_score() �Լ��� ȣ���Ͽ� ������ ����ִ� ����Ʈ�� ������������ ����
- * 4. store_score() �Լ��� ���� ����Ʈ�� �ִ� �������� ���Ͽ� ����
- */
 public class manage_data {
 	private String fileName;
 	private PrintWriter outputStream;
@@ -27,7 +21,7 @@ public class manage_data {
 		
 	}
 	
-	public void store_list(int score) { // ����Ʈ�� ���� ���� �ִ� 10��
+	public void store_list(int score) {
 		
 		if(index < 10) {
 			score_list[index] = score;
@@ -41,9 +35,13 @@ public class manage_data {
 	}
 	
 	
-	public void store_score() { // ���Ͽ� ���� ����
+	public void store_score() {
 		int i;
 		String grade;
+		
+		read_score();
+		store_list();
+		arrange_score();
 		
 		try {
 			outputStream = new PrintWriter(fileName);
@@ -60,7 +58,7 @@ public class manage_data {
 		outputStream.close();
 	}
 	
-	public void read_score( ) { // ������ ���� �о�鿩�� list�� ����
+	public void read_score( ) {
 		int i, k = 0;
 		String[] file_score = new String[3];
 		
@@ -86,7 +84,7 @@ public class manage_data {
 		
 		
 	}
-	public void arrange_score() { // list ����
+	public void arrange_score() {
 		int i, j,temp;
 		
 		for(i = 0; i < index; i++) {
@@ -100,7 +98,7 @@ public class manage_data {
 		}
 	}
 	
-	public String get_grade(int score) { // ������ ���� grade �ο�
+	public String get_grade(int score) {
 		if(score >= 10000) {
 			return "A+";
 		}
@@ -121,7 +119,7 @@ public class manage_data {
 		}
 	}
 	
-	public String[] get_score() { // ���� �׷��̵� ���ھ ���Ͽ��� �о �迭�� ���� �� ����
+	public String[] get_score() { 
 		String line[] = new String[10];
 		int i = 0;
 		try {
@@ -143,7 +141,7 @@ public class manage_data {
 		
 	}
 	
-	public void delete_all_score() { // ���� ���� �ʱ�ȭ
+	public void delete_all_score() { 
 		try {
 			outputStream = new PrintWriter(fileName);
 		}
