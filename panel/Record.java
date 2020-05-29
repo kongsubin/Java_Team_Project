@@ -1,5 +1,6 @@
 package panel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent ;
@@ -35,7 +36,8 @@ public class Record extends JPanel{
 			
 			label = new JLabel("Ranking         Grade       Score");
 			label.setSize(200,10);
-			label.setLocation(175,0);
+			label.setLocation(175,50);
+			label.setForeground(Color.WHITE);
 			add(label);
 			
 
@@ -61,6 +63,7 @@ public class Record extends JPanel{
 			scores[i] = new JLabel(line[i]);
 			scores[i].setSize(200,10);
 			scores[i].setLocation(175,20+i*20);
+			scores[i].setForeground(Color.WHITE);
 			add(scores[i]);
 		}
 		rankings = i;
