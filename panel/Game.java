@@ -20,10 +20,9 @@ public class Game extends JPanel{
 	private Main_Frame win ;
 	private RunGame running;
 	private Image background = new ImageIcon(Start.class.getResource("../image/Null_image.jpg")).getImage() ;
-	JPanel p;
-	int x = 0, y = 0;
+	// JPanel p;
 	private Clip clip ;
-	JPanel user = new JPanel() 	{
+	private JPanel user = new JPanel() 	{
 		Image background = new ImageIcon(Game.class.getResource("../Image/User.png")).getImage();
 		public void paint(Graphics g) {
 				g.drawImage(background, 0, 0, null) ;	
@@ -58,6 +57,8 @@ public class Game extends JPanel{
 	public void paintComponent(Graphics g)
 	{
 		g.drawImage(background, 0, 0, win) ;
+		setOpaque(false) ;
+		super.paintComponent(g);
 	}
 	
 	public void Play(File sound, boolean repeat)
