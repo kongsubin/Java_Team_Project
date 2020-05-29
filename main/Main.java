@@ -12,11 +12,11 @@ public class Main{
 	public static void main(String[] args){
 		Main_Frame win = new Main_Frame() ;
 
-		win.setTitle("My Grade is..") ;
-		win.start = new Start(win) ;
+		win.setTitle("My Grade is.. : Version0.01") ;
+		
 		win.desc = new Desc(win) ;
 		win.record = new Record(win) ;
-		
+		win.start = new Start(win) ;
 
 		win.add(win.start) ;
 		win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE) ;

@@ -1,7 +1,11 @@
 package panel;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent ;
 import java.awt.event.ActionListener ;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,7 +22,8 @@ public class Record extends JPanel{
 	private String[] line = new String[10];
 	private JLabel[] scores = new JLabel[10];
 	private int rankings;
-
+	private Image background = new ImageIcon(Start.class.getResource("../image/Null_image.jpg")).getImage() ;
+	
 	public Record(Main_Frame win){
 			this.win = win ;
 			setLayout(null) ;
@@ -37,6 +42,13 @@ public class Record extends JPanel{
 			jButton.addActionListener(new MyActionListener()) ;
 	}
 	
+	public void paintComponent(Graphics g)
+	{
+		g.drawImage(background, 0, 0, win) ;
+		setOpaque(false) ;
+		super.paintComponent(g);
+	}
+
 	public void show_record() { // show record on screen
 		int i;
 		
