@@ -2,9 +2,14 @@ package panel;
 import java.awt.event.ActionEvent ;
 import java.awt.Graphics ;
 import java.awt.event.ActionListener ;
+import java.io.File;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Image ;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon ;
 import main.Main_Frame;
 
@@ -19,10 +24,15 @@ public class Start extends JPanel{
 	private sDialog reset ;
 	private qDialog quit ;
 	private Image background = new ImageIcon(Start.class.getResource("../image/Main_image.jpg")).getImage() ;
+	private Clip clip ;
 	
 	public Start(Main_Frame win){
 			this.win = win ;
 			setLayout(null) ;
+			String path = Start.class.getResource("").getPath();
+
+			File music = new File(path + "bgm/main_bgm.wav") ;
+			Play(music , true) ;
 			
 			GButton = new JButton("Game Start") ;
 			GButton.setSize(150, 20) ;
@@ -63,11 +73,27 @@ public class Start extends JPanel{
 		super.paintComponent(g);
 	}
 
+	public void Play(File sound, boolean repeat)
+	{
+		try
+        {
+            clip = AudioSystem.getClip() ;
+            clip.open(AudioSystem.getAudioInputStream(sound)) ;
+            clip.start();
+            if(repeat) clip.loop(-1) ; // repeat : true -> loop . false -> stop 
+        }
+        catch (Exception ex)
+        {
+        	ex.printStackTrace();	
+        }
+	}
+	
 	class MyActionListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 					JButton btn = (JButton) e.getSource() ;
 					if(btn.getText().equals("Game Start")) 
 					{
+						clip.stop();
 						win.game = new Game(win) ;
 						win.change("Game"); // 화면을 바꿔주는..
 					}

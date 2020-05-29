@@ -4,7 +4,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent ;
 import java.awt.event.ActionListener ;
+import java.io.File;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -20,10 +23,15 @@ public class Game extends JPanel{
 	private Image background = new ImageIcon(Start.class.getResource("../image/Null_image.jpg")).getImage() ;
 	JPanel p;
 	int x = 0, y = 0;
-
+	private Clip clip ;
+	
 	public Game(Main_Frame win){
 			this.win = win ;
 			setLayout(null) ;
+			String path = Start.class.getResource("").getPath();
+
+			File music = new File(path + "bgm/game_bgm.wav") ;
+			Play(music , true) ;
 
 			jButton = new JButton("Back") ;
 			jButton.setSize(50, 20) ;
@@ -45,10 +53,27 @@ public class Game extends JPanel{
 		setOpaque(false) ;
 		super.paintComponent(g);
 	}
+	
+	public void Play(File sound, boolean repeat)
+	{
+		try
+        {
+            clip = AudioSystem.getClip() ;
+            clip.open(AudioSystem.getAudioInputStream(sound)) ;
+            clip.start();
+            if(repeat) clip.loop(-1) ; // repeat : true -> loop . false -> stop 
+        }
+        catch (Exception ex)
+        {
+        	ex.printStackTrace();	
+        }
+	}
 
 	class MyActionListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 					running.kill();
+					clip.stop();
+					win.start = new Start(win) ;
 					win.change("Start") ;
 			}
 	}
