@@ -3,7 +3,9 @@ package thread;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+// import javax.swing.JPanel;
+
+import basic.Basic;
 import main.Main_Frame;
 
 @SuppressWarnings("serial")
@@ -11,8 +13,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	private Thread th; 
 	@SuppressWarnings("unused")
 	private Main_Frame win;
-	private JPanel p ;
-	private int x = 0, y = 200; 
+	private Basic p ;
 	 
 	boolean KeyUp = false;
 	boolean KeyDown = false;
@@ -20,7 +21,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	boolean KeyRight = false;
 	boolean KeySpace = false;
 
-	public RunGame(Main_Frame win, JPanel p){
+	public RunGame(Main_Frame win, Basic p){
 			this.win = win;
 			this.p = p;
 			win.addKeyListener(this);
@@ -36,7 +37,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 		try { 
 			while (true) { 
 				KeyProcess();
-				p.setLocation(x,y);
+				p.setLocation(p.getX(),p.getY());
 				repaint();
 				Thread.sleep(20); 
 			}
@@ -53,19 +54,19 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 		// TODO Auto-generated method stub
 		if(KeyUp == true)  {
 			System.out.println("up");
-			y -= 5;
+			p.setY(p.getY() - 5) ; 
 		}
 		if(KeyDown == true) {
 			System.out.println("down");
-			y += 5;
+			p.setY(p.getY() + 5) ; 
 		}
 		if(KeyLeft == true)  {
 			System.out.println("left");
-			x -= 5;
+			p.setX(p.getX() - 5) ; 
 		}
 		if(KeyRight == true) {
 			System.out.println("right");
-			x += 5;
+			p.setX(p.getX() + 5) ;
 		}
 		if(KeySpace == true) {
 			System.out.println("attack");

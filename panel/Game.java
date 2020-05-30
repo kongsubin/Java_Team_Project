@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import basic.Basic;
 import main.Main_Frame;
 import thread.RunGame;
 
@@ -22,7 +23,7 @@ public class Game extends JPanel{
 	private Image background = new ImageIcon(Start.class.getResource("../image/Null_image.jpg")).getImage() ;
 	// JPanel p;
 	private Clip clip ;
-	private JPanel user = new JPanel() 	{
+	private Basic user = new Basic() 	{
 		Image background = new ImageIcon(Game.class.getResource("../Image/User.png")).getImage();
 		public void paint(Graphics g) {
 				g.drawImage(background, 0, 0, null) ;	
@@ -49,7 +50,8 @@ public class Game extends JPanel{
 			p.setBackground(Color.RED);
 			add(p);
 			*/
-			user.setBounds(100, 100, 100, 100);
+			user.init(0, 200, 1000, 10) ;
+			user.setBounds(user.getX(), user.getY(), 100, 100);
 			add(user) ;
 			running = new RunGame(win, user);
 	}
