@@ -30,6 +30,8 @@ public class Game extends JPanel{
 		} ;
 	} ;
 	
+	Graphics pan;
+	
 	public Game(Main_Frame win){
 			this.win = win ;
 			setLayout(null) ;
@@ -44,6 +46,7 @@ public class Game extends JPanel{
 			add(jButton) ;
 			jButton.addActionListener(new MyActionListener()) ;
 			
+			pan = win.getGraphics();
 			/*
 			p = new JPanel();
 			p.setBounds(100, 100, 50, 50);
@@ -58,9 +61,12 @@ public class Game extends JPanel{
 	
 	public void paintComponent(Graphics g)
 	{
+		pan.drawImage(background, 0, 0, win) ;
+		running.Draw_Missile(pan);
+		
 		g.drawImage(background, 0, 0, win) ;
 		setOpaque(false) ;
-		super.paintComponent(g);
+		super.paintComponent(g);	
 	}
 	
 	public void Play(File sound, boolean repeat)

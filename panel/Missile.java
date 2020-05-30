@@ -11,7 +11,7 @@ public class Missile {
 	}
 
 	public void move() {
-		x += 10;
+		x += 30;
 	}
 	
 }

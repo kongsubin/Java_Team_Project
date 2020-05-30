@@ -1,6 +1,7 @@
 package thread;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	boolean KeyRight = false;
 	boolean KeySpace = false;
 	
-	
+
 	ArrayList<Missile> Aplus_List = new ArrayList<>();
 	Missile AInfo; 
 	Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
@@ -140,7 +141,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	
 	public void MissileProcess() {
 		if (KeySpace) {
-			AInfo = new Missile(p.getX(), p.getY());
+			AInfo = new Missile(p.getX()+ 10, p.getY()+ 50 );
 			Aplus_List.add(AInfo);
 		}
 
@@ -151,15 +152,14 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 				Aplus_List.remove(i);
 			}
 		}
-		Draw_Missile();
 	}
 
-	public void Draw_Missile(){
+	public void Draw_Missile(Graphics pan){
 		for (int i = 0 ; i < Aplus_List.size()  ; ++i){
 			AInfo = (Missile) (Aplus_List.get(i)); 
 			System.out.println(AInfo.x + "  "+AInfo.y);
-			Graphics temp = p.getG();
-			//temp.drawImage(Aplus, AInfo.x, AInfo.y, win); 
+			//Graphics temp = p.getG();
+			pan.drawImage(Aplus, AInfo.x, AInfo.y, win); 
 		}
 	}
  	
