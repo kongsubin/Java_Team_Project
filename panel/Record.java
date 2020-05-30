@@ -35,7 +35,7 @@ public class Record extends JPanel{
 			add(jButton) ;
 			
 			label = new JLabel("Ranking         Grade       Score");
-			label.setSize(200,10);
+			label.setSize(200,20);
 			label.setLocation(175,50);
 			label.setForeground(Color.WHITE);
 			add(label);
