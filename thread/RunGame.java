@@ -1,5 +1,6 @@
 package thread;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	
 	ArrayList<Missile> Aplus_List = new ArrayList<>();
 	Missile AInfo; 
-	java.awt.Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
+	Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
 	
 
 	public RunGame(Main_Frame win, Basic p){
