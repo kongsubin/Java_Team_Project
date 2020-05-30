@@ -57,7 +57,7 @@ public class Record extends JPanel{
 		for(i = 0; i < rankings; i++) { // delete rankings on screen before rewrite
 			remove(scores[i]);
 		}
-		line = manage.get_score();
+		line = manage.print_score();
 		for(i = 0; i < line.length; i++) { // show ranking newly on screen
 			System.out.println(line[i]);
 			scores[i] = new JLabel(line[i]);
