@@ -50,7 +50,7 @@ public class Game extends JPanel{
 			p.setBackground(Color.RED);
 			add(p);
 			*/
-			user.init(0, 200, 1000, 10) ;
+			user.init(0, 200, 1000, 10, win, "../Image/User.png") ;
 			user.setBounds(user.getX(), user.getY(), 100, 100);
 			add(user) ;
 			running = new RunGame(win, user);

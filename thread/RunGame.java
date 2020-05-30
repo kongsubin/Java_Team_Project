@@ -38,7 +38,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 			while (true) { 
 				KeyProcess();
 				p.setLocation(p.getX(),p.getY());
-				repaint();
+				p.repaint();
 				Thread.sleep(20); 
 			}
 		} catch (Exception e) {
