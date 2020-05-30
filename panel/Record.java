@@ -62,7 +62,7 @@ public class Record extends JPanel{
 			System.out.println(line[i]);
 			scores[i] = new JLabel(line[i]);
 			scores[i].setSize(200,10);
-			scores[i].setLocation(175,20+i*20);
+			scores[i].setLocation(175,70+i*20);
 			scores[i].setForeground(Color.WHITE);
 			add(scores[i]);
 		}
