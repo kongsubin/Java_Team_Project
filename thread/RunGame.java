@@ -1,12 +1,17 @@
 package thread;
-
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 // import javax.swing.JPanel;
 
 import basic.Basic;
 import main.Main_Frame;
+import panel.Missile;
+import panel.Start;
 
 @SuppressWarnings("serial")
 public class RunGame extends JFrame implements Runnable, KeyListener{
@@ -20,12 +25,20 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	boolean KeyLeft = false;
 	boolean KeyRight = false;
 	boolean KeySpace = false;
+	
+	
+	ArrayList<Missile> Aplus_List = new ArrayList<>();
+	Missile AInfo; 
+	java.awt.Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
+	
 
 	public RunGame(Main_Frame win, Basic p){
 			this.win = win;
 			this.p = p;
+			
 			win.addKeyListener(this);
 			win.setFocusable(true);
+			
 			th = new Thread(this); 
 			th.start(); 
 	}
@@ -37,6 +50,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 		try { 
 			while (true) { 
 				KeyProcess();
+				MissileProcess();
 				p.setLocation(p.getX(),p.getY());
 				p.repaint();
 				Thread.sleep(20); 
@@ -121,6 +135,36 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 			break;
 		}
 	}
+	
+	
+	public void MissileProcess() {
+		if (KeySpace) {
+			AInfo = new Missile(p.getX(), p.getY());
+			Aplus_List.add(AInfo);
+		}
+
+		for (int i = 0; i < Aplus_List.size(); ++i) {
+			AInfo = (Missile) Aplus_List.get(i);
+			AInfo.move();
+			if (AInfo.x > 550) {
+				Aplus_List.remove(i);
+			}
+		}
+		Draw_Missile();
+	}
+
+	public void Draw_Missile(){
+		for (int i = 0 ; i < Aplus_List.size()  ; ++i){
+			AInfo = (Missile) (Aplus_List.get(i)); 
+			System.out.println(AInfo.x + "  "+AInfo.y);
+			Graphics temp = p.getG();
+			//temp.drawImage(Aplus, AInfo.x, AInfo.y, win); 
+		}
+	}
+ 	
+
+	
+	
 	
 }	
 
