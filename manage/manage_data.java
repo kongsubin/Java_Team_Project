@@ -119,7 +119,7 @@ public class manage_data {
 		}
 	}
 	
-	public String[] get_score() { // store scores in line
+	public String[] print_score() { // store scores in line and return and print on screen
 		String line[] = new String[10];
 		int i = 0;
 		try {
