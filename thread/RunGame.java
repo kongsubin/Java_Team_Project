@@ -93,14 +93,10 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 			System.out.println("attack");
 		}
 		
-		if(p.getX()>Main.SCREEN_WIDTH - 80) 
-			p.setX(Main.SCREEN_WIDTH - 80); 
-		if(p.getX() < -20) 
-			p.setX(-20) ; 
-		if(p.getY()>Main.SCREEN_HEIGHT - 120) 
-			p.setY(Main.SCREEN_HEIGHT - 120) ; 
-		if(p.getY() < 0) 
-			p.setY(0) ; 
+		if(p.getX()>Main.SCREEN_WIDTH - 80) p.setX(Main.SCREEN_WIDTH - 80) ; 
+		if(p.getX() < -20) p.setX(-20) ; 
+		if(p.getY()>Main.SCREEN_HEIGHT - 120) p.setY(Main.SCREEN_HEIGHT - 120) ; 
+		if(p.getY() < 0) p.setY(0) ; 
 		
 	}
 	
@@ -173,7 +169,6 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 		for (int i = 0 ; i < Aplus_List.size()  ; ++i){
 			AInfo = (Missile) (Aplus_List.get(i)); 
 			System.out.println(AInfo.x + "  "+AInfo.y);
-			//Graphics temp = p.getG();
 			pan.drawImage(Aplus, AInfo.x, AInfo.y, win); 
 		}
 	}

@@ -28,7 +28,7 @@ public class Basic extends JPanel{
 	boolean KeySpace = false ;
 	*/
 	
-	public void init(int x, int y, int hp, int damage, Main_Frame win, String path) {//기본적인 세팅(basic setting)
+	public void init(int x, int y, int hp, int damage, Main_Frame win, String path) {//(basic setting)
 		this.x = x;
 		this.y = y;
 		this.hp = hp ;
@@ -46,7 +46,7 @@ public class Basic extends JPanel{
 	}
 	*/
 	
-	public int attack(int damage) {//hp감소
+	public int attack(int damage) {//hp
 		this.hp -= damage ;
 	 
 		return this.hp ; 	 
@@ -63,6 +63,7 @@ public class Basic extends JPanel{
 	}
 	
 	public int getDamage() { return this.attack_d ; }
+	public int getHp() { return this.hp; }
 	public int getX() { return this.x ; }
 	public int getY() { return this.y ; }
 	public void setX(int x) { this.x = x ; }
@@ -82,15 +83,15 @@ class Attack{
 	}
 }
 
-class Enemy{ // 적 위치 파악 및 이동을 위한 클래스
+class Enemy{
 int x;
 int y;
 
-Enemy(int x, int y){ // 적좌표를 받아 객체화 시키기 위한 메소드
+Enemy(int x, int y){
 this.x = x;
 this.y = y;
 }
-public void move(){ // x좌표 -3 만큼 이동 시키는 명령 메소드
+public void move(){
 x -= 3;
 }
 }
