@@ -16,7 +16,7 @@ import main.Main_Frame;
 import thread.RunGame;
 
 @SuppressWarnings("serial")
-public class Game extends JPanel{
+public class Game extends JPanel implements Runnable{
 	private JButton jButton ;
 	private Main_Frame win ;
 	private RunGame running;
@@ -31,6 +31,7 @@ public class Game extends JPanel{
 	} ;
 	
 	Graphics pan;
+	private Thread game_th;
 	
 	public Game(Main_Frame win){
 			this.win = win ;
@@ -47,26 +48,23 @@ public class Game extends JPanel{
 			jButton.addActionListener(new MyActionListener()) ;
 			
 			pan = win.getGraphics();
-			/*
-			p = new JPanel();
-			p.setBounds(100, 100, 50, 50);
-			p.setBackground(Color.RED);
-			add(p);
-			*/
+			game_th =  new Thread(this); 
+			game_th.start(); 
+			
 			user.init(0, 200, 1000, 10, win, "../Image/User.png") ;
 			user.setBounds(user.getX(), user.getY(), 100, 100);
 			add(user) ;
 			running = new RunGame(win, user);
 	}
 	
-	public void paintComponent(Graphics g)
+	public void paintComponent(Graphics pan)
 	{
 		pan.drawImage(background, 0, 0, win) ;
 		running.Draw_Missile(pan);
 		
-		g.drawImage(background, 0, 0, win) ;
+		//g.drawImage(background, 0, 0, win) ;
 		setOpaque(false) ;
-		super.paintComponent(g);	
+		super.paintComponent(pan);
 	}
 	
 	public void Play(File sound, boolean repeat)
@@ -87,9 +85,26 @@ public class Game extends JPanel{
 	class MyActionListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 					running.kill();
+					kill();
 					clip.stop();
 					win.start = new Start(win) ;
 					win.change("Start") ;
 			}
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		try { 
+			while (true) { 
+				repaint();
+				Thread.sleep(20); 
+			}
+		} catch (Exception e) {
+		}		
+	}
+	public void kill() {
+		System.out.println("game thread kill!");
+		game_th.interrupt();
 	}
 }	

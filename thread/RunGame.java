@@ -1,7 +1,6 @@
 package thread;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import javax.swing.JFrame;
 // import javax.swing.JPanel;
 
 import basic.Basic;
+import main.Main;
 import main.Main_Frame;
 import panel.Missile;
 import panel.Start;
@@ -33,6 +33,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	Missile AInfo; 
 	Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
 	
+	Graphics pan;
 
 	public RunGame(Main_Frame win, Basic p){
 			this.win = win;
@@ -40,6 +41,8 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 			
 			win.addKeyListener(this);
 			win.setFocusable(true);
+			
+			pan = win.getGraphics();
 			
 			th = new Thread(this); 
 			th.start(); 
@@ -54,7 +57,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 				KeyProcess();
 				MissileProcess();
 				p.setLocation(p.getX(),p.getY());
-				p.repaint();
+				//p.repaint();
 				Thread.sleep(20); 
 			}
 		} catch (Exception e) {
@@ -87,6 +90,16 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 		if(KeySpace == true) {
 			System.out.println("attack");
 		}
+		
+		if(p.getX()>Main.SCREEN_WIDTH - 80) 
+			p.setX(Main.SCREEN_WIDTH - 80); 
+		if(p.getX() < -20) 
+			p.setX(-20) ; 
+		if(p.getY()>Main.SCREEN_HEIGHT - 120) 
+			p.setY(Main.SCREEN_HEIGHT - 120) ; 
+		if(p.getY() < 0) 
+			p.setY(0) ; 
+		
 	}
 	
 	@Override
