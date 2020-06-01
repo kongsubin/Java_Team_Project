@@ -21,6 +21,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	@SuppressWarnings("unused")
 	private Main_Frame win;
 	private Basic p ;
+	private boolean repeat = true;
 	 
 	boolean KeyUp = false;
 	boolean KeyDown = false;
@@ -53,7 +54,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 		// TODO Auto-generated method stub
 		System.out.println("thread create!");
 		try { 
-			while (true) { 
+			while (repeat) { 
 				KeyProcess();
 				MissileProcess();
 				p.setLocation(p.getX(),p.getY());
@@ -66,7 +67,8 @@ public class RunGame extends JFrame implements Runnable, KeyListener{
 	
 	public void kill() {
 		System.out.println("thread kill!");
-		th.interrupt();
+//		th.interrupt();
+		repeat = false;
 	}
 	
 	private void KeyProcess() {

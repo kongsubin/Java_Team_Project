@@ -30,6 +30,8 @@ public class Game extends JPanel implements Runnable{
 		} ;
 	} ;
 	
+	private boolean repeat = true;
+	
 	Graphics pan;
 	private Thread game_th;
 	
@@ -96,7 +98,7 @@ public class Game extends JPanel implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		try { 
-			while (true) { 
+			while (repeat) { 
 				repaint();
 				Thread.sleep(20); 
 			}
@@ -105,6 +107,7 @@ public class Game extends JPanel implements Runnable{
 	}
 	public void kill() {
 		System.out.println("game thread kill!");
-		game_th.interrupt();
+		//game_th.interrupt();
+		repeat = false;
 	}
 }	
