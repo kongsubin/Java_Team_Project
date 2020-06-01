@@ -14,7 +14,7 @@ import main.Main_Frame;
 public class Desc extends JPanel{
 	private JButton jButton ;
 	private Main_Frame win ;
-	private Image background = new ImageIcon(Start.class.getResource("../image/Null_image.jpg")).getImage() ;
+	private Image description = new ImageIcon(Start.class.getResource("../image/description_image.jpg")).getImage() ;
 	
 	public Desc(Main_Frame win){
 			this.win = win ;
@@ -30,7 +30,7 @@ public class Desc extends JPanel{
 
 	public void paintComponent(Graphics g)
 	{
-		g.drawImage(background, 0, 0, win) ;
+		g.drawImage(description, 0, 0, win) ;
 		setOpaque(false) ;
 		super.paintComponent(g);
 	}
