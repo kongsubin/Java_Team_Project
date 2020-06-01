@@ -1,4 +1,5 @@
 package panel;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent ;
@@ -9,6 +10,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import basic.Basic;
@@ -20,6 +22,7 @@ public class Game extends JPanel implements Runnable{
 	private JButton jButton ;
 	private Main_Frame win ;
 	private RunGame running;
+	private JLabel[] status = new JLabel[3]; // status (hp, score, time);
 	private Image background = new ImageIcon(Start.class.getResource("../image/Null_image.jpg")).getImage() ;
 	// JPanel p;
 	private Clip clip ;
@@ -56,7 +59,19 @@ public class Game extends JPanel implements Runnable{
 			user.init(0, 200, 1000, 10, win, "../Image/User.png") ;
 			user.setBounds(user.getX(), user.getY(), 100, 100);
 			add(user) ;
-			running = new RunGame(win, user);
+			
+			status[0] = new JLabel("Hp : ");
+			status[1] = new JLabel("Score : ");
+			status[2] = new JLabel("Time : ");
+			
+			for(int i = 0; i < 3; i++) {
+				status[i].setSize(100,15);
+				status[i].setLocation(450,0+20*i);
+				status[i].setForeground(Color.WHITE);
+				add(status[i]);
+			}
+			
+			running = new RunGame(win, user, status);
 	}
 	
 	public void paintComponent(Graphics pan)
@@ -110,4 +125,5 @@ public class Game extends JPanel implements Runnable{
 		//game_th.interrupt();
 		repeat = false;
 	}
+	
 }	
