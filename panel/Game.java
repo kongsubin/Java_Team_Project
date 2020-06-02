@@ -57,7 +57,7 @@ public class Game extends JPanel implements Runnable{
 			game_th =  new Thread(this); 
 			game_th.start(); 
 			
-			user.init(0, 200, 1000, 10, win, "../Image/User.png") ;
+			user.init(0, 200, 1000, 10, win) ;
 			user.setBounds(user.getX(), user.getY(), 100, 100);
 			add(user) ;
 			
@@ -72,7 +72,7 @@ public class Game extends JPanel implements Runnable{
 				add(status[i]);
 			}
 			
-			running = new RunGame(win, user, status);
+			running = new RunGame(win, this, user, status);
 	}
 	
 	public void paintComponent(Graphics pan)
@@ -102,9 +102,9 @@ public class Game extends JPanel implements Runnable{
 
 	class MyActionListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-					running.kill();
-					kill();
-					clip.stop();
+					running.kill() ;
+					kill() ;
+					clip.stop() ;
 					win.start = new Start(win) ;
 					win.change("Start") ;
 			}

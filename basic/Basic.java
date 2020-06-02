@@ -15,11 +15,7 @@ public class Basic extends JPanel{
 	// private static final double attack_s = 5.0;
 	private int x = 0 ;
 	private int y = 0 ;
-	private Image bufferi ;
-	private Graphics bufferg ;
 	private Main_Frame win ;
-	private Image charImage ;
-	
 	/*
 	boolean KeyUp = false ;
 	boolean KeyDown = false ;
@@ -28,13 +24,12 @@ public class Basic extends JPanel{
 	boolean KeySpace = false ;
 	*/
 	
-	public void init(int x, int y, int hp, int damage, Main_Frame win, String path) {//(basic setting)
+	public void init(int x, int y, int hp, int damage, Main_Frame win) {//(basic setting)
 		this.x = x;
 		this.y = y;
 		this.hp = hp ;
 		this.attack_d = damage ;
 		this.win = win ;
-		charImage = new ImageIcon(Basic.class.getResource(path)).getImage();
 	}
 	
 	/*
@@ -52,23 +47,12 @@ public class Basic extends JPanel{
 		return this.hp ; 	 
 	}
 	
-	public void paint(Graphics g)
-	{
-		bufferi = createImage(550, 500) ;
-		bufferg = bufferi.getGraphics() ;
-		bufferg.clearRect(0, 0, 550, 500) ;
-		bufferg.drawImage(charImage, x, y, win);
-		g.drawImage(bufferi, 0, 0, win); 
-		
-	}
-	
 	public int getDamage() { return this.attack_d ; }
 	public int getHp() { return this.hp; }
 	public int getX() { return this.x ; }
 	public int getY() { return this.y ; }
 	public void setX(int x) { this.x = x ; }
 	public void setY(int y) { this.y = y ; }
-	public Graphics getG() { return this.bufferg ; }
 	
 }
 
