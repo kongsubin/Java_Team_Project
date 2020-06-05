@@ -1,9 +1,5 @@
 package basic;
 
-import java.awt.Graphics;
-import java.awt.Image;
-
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import main.Main_Frame;
@@ -15,15 +11,9 @@ public class Basic extends JPanel{
 	// private static final double attack_s = 5.0;
 	private int x = 0 ;
 	private int y = 0 ;
+	@SuppressWarnings("unused")
 	private Main_Frame win ;
-	/*
-	boolean KeyUp = false ;
-	boolean KeyDown = false ;
-	boolean KeyLeft = false ;
-	boolean KeyRight = false ;
-	boolean KeySpace = false ;
-	*/
-	
+
 	public void init(int x, int y, int hp, int damage, Main_Frame win) {//(basic setting)
 		this.x = x;
 		this.y = y;
@@ -32,16 +22,7 @@ public class Basic extends JPanel{
 		this.win = win ;
 	}
 	
-	/*
-	public void KeyProcess() {
-		if(KeyUp == true)  y -= 5;
-		if(KeyDown == true) y += 5;
-		if(KeyLeft == true)  x -= 5;
-		if(KeyRight == true) x += 5;
-	}
-	*/
-	
-	public int attack(int damage) {//hp
+	public int attack(int damage) { // hp
 		this.hp -= damage ;
 	 
 		return this.hp ; 	 
@@ -55,28 +36,3 @@ public class Basic extends JPanel{
 	public void setY(int y) { this.y = y ; }
 	
 }
-
-/*
-class Attack{
-	Point pos;
-	Attack(int x, int y){
-		pos = new  Point(x,y);
-	}
-	public void move() {
-		pos.x+=10;
-	}
-}
-
-class Enemy{
-int x;
-int y;
-
-Enemy(int x, int y){
-this.x = x;
-this.y = y;
-}
-public void move(){
-x -= 3;
-}
-}
-*/

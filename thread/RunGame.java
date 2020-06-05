@@ -36,6 +36,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private long seed = System.currentTimeMillis();
 	private Random rand = new Random(seed);
 	private int ran;
+	private int Missile_speed = 7 ;
 
 	private boolean KeyUp = false;
 	private boolean KeyDown = false;
@@ -49,14 +50,13 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private ArrayList<Missile> Fplus_List = new ArrayList<>();
 
 	private Missile AInfo;
-	private Missile BInfo;
+	// private Missile BInfo;
 	private Missile CInfo;
 	private Missile DInfo;
 	private Missile FInfo;
 
-	private Image random;
 	private Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
-	private Image Bplus = new ImageIcon(Start.class.getResource("../image/b_30.png")).getImage();
+	// private Image Bplus = new ImageIcon(Start.class.getResource("../image/b_30.png")).getImage();
 	private Image Cplus = new ImageIcon(Start.class.getResource("../image/c_30.png")).getImage();
 	private Image Dplus = new ImageIcon(Start.class.getResource("../image/d_35.png")).getImage();
 	private Image Fplus = new ImageIcon(Start.class.getResource("../image/f_40.png")).getImage();
@@ -100,9 +100,8 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 				MissileProcess();
 				MonsterProcess();
 				// Enemy_MissileProcess();
-				// Draw_Enemy_Missile(pan);
 				user.setLocation(user.getX(), user.getY());
-				// Enemy_MissileProcess();
+				Enemy_MissileProcess();
 				Thread.sleep(20);
 				cnt++;
 			}
@@ -112,7 +111,6 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 
 	public void kill() {
 		System.out.println("thread kill!");
-//		th.interrupt();
 		repeat = false;
 	}
 
@@ -201,7 +199,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 
 	public void MissileProcess() {
 		if (KeySpace) {
-			AInfo = new Missile(user.getX() + 10, user.getY() + 50);
+			AInfo = new Missile(user.getX() + 10, user.getY() + 15);
 			Aplus_List.add(AInfo);
 		}
 
@@ -220,105 +218,70 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 				}
 			}
 
-			if (AInfo.x > 550) {
+			if (AInfo.getX() > 550) {
 				Aplus_List.remove(i);
 			}
 		}
 	}
 
 	public void Enemy_MissileProcess() { // Enemy Missile Process
-		for (int i = 0; i < Mon_List.size(); i++) {
-			switch (Mon_List.get(i).getDamage() / 10) {
-			case 3:
-				FInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
-				Fplus_List.add(FInfo);
+		if(cnt % 100 == 0)
+		{
+			for (int i = 0; i < Mon_List.size(); i++) {
+				switch (Mon_List.get(i).getDamage() / 10) {
+				case 3:
+					FInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
+					Fplus_List.add(FInfo);
 
-				/*
-				 * for (int j = 0; j < Fplus_List.size(); ++j) { FInfo = (Missile)
-				 * Fplus_List.get(j); FInfo.enemy_move(Mon_List.get(j).getSpeed()); if (FInfo.x
-				 * < -20) { Fplus_List.remove(j); }
-				 * 
-				 * }
-				 */
-				break;
+					break;
+				case 2:
+					DInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
+					Dplus_List.add(DInfo);
 
-			case 2:
-				DInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
-				Dplus_List.add(DInfo);
+					break;
+				case 1:
+					CInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
+					Cplus_List.add(CInfo);
 
-				/*
-				 * for (int j = 0; j < Dplus_List.size(); ++j) { DInfo = (Missile)
-				 * Dplus_List.get(j); //DInfo.enemy_move(Mon_List.get(j).getSpeed()); if
-				 * (DInfo.x < -20) { Dplus_List.remove(j); } }
-				 */
-				break;
-			case 1:
-				CInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
-				Cplus_List.add(CInfo);
-
-				/*
-				 * for (int j = 0; j < Cplus_List.size(); ++j) { CInfo = (Missile)
-				 * Cplus_List.get(j); //CInfo.enemy_move(Mon_List.get(j).getSpeed()); if
-				 * (CInfo.x < -20) { Cplus_List.remove(j); } }
-				 */
-
-				break;
+					break;
+				}
 			}
 		}
-
 	}
 
 	public void Draw_Missile(Graphics pan) {
 		for (int i = 0; i < Aplus_List.size(); ++i) {
 			AInfo = (Missile) (Aplus_List.get(i));
 			// System.out.println(AInfo.x + " "+AInfo.y);
-			pan.drawImage(Aplus, AInfo.x, AInfo.y, win);
+			pan.drawImage(Aplus, AInfo.getX(), AInfo.getY(), win);
 		}
 	}
 
 	public void Draw_Enemy_Missile(Graphics pan) { // Draw Enemy's Missile
+		for (int j = 0; j < Fplus_List.size(); ++j) {
+			FInfo = (Missile) (Fplus_List.get(j));
+			pan.drawImage(Fplus, FInfo.getX(), FInfo.getY(), win);
+			FInfo.enemy_move(Missile_speed);
+			if (FInfo.getX() < -20) {
+				Fplus_List.remove(j);
+			}
+		}
 
-		for (int i = 0; i < Mon_List.size(); i++) {
-			switch (Mon_List.get(i).getDamage() / 10) {
-			case 3:
-				// System.out.println("F�̻��� �׸���");
-				for (int j = 0; j < Fplus_List.size(); ++j) {
-					FInfo = (Missile) (Fplus_List.get(j));
-					pan.drawImage(Fplus, FInfo.x, FInfo.y, win);
-					FInfo.enemy_move(Mon_List.get(i).getSpeed());
-					if (FInfo.x < -20) {
-						Fplus_List.remove(j);
-					}
-					// System.out.println(AInfo.x + " "+AInfo.y);
+		for (int j = 0; j < Dplus_List.size(); ++j) {
+			DInfo = (Missile) (Dplus_List.get(j));
+			pan.drawImage(Dplus, DInfo.getX(), DInfo.getY(), win);
+			DInfo.enemy_move(Missile_speed);
+			if (DInfo.getX() < -20) {
+				Dplus_List.remove(j);
+			}
+		}
 
-				}
-				break;
-			case 2:
-				// System.out.println("D�̻��� �׸���");
-				for (int j = 0; j < Dplus_List.size(); ++j) {
-					DInfo = (Missile) (Dplus_List.get(j));
-					pan.drawImage(Dplus, DInfo.x, DInfo.y, win);
-					DInfo.enemy_move(Mon_List.get(i).getSpeed());
-					// System.out.println(Mon_List.get(j).getSpeed());;
-					if (DInfo.x < -20) {
-						Dplus_List.remove(j);
-					}
-					// System.out.println(AInfo.x + " "+AInfo.y);
-				}
-				break;
-			case 1:
-				// System.out.println("C�̻��� �׸���");
-				for (int j = 0; j < Cplus_List.size(); ++j) {
-					CInfo = (Missile) (Cplus_List.get(j));
-					pan.drawImage(Cplus, CInfo.x, CInfo.y, win);
-					CInfo.enemy_move(Mon_List.get(i).getSpeed());
-					// System.out.println(Mon_List.get(j).getSpeed());
-					if (CInfo.x < -20) {
-						Cplus_List.remove(j);
-					}
-					// System.out.println(AInfo.x + " "+AInfo.y);
-				}
-				break;
+		for (int j = 0; j < Cplus_List.size(); ++j) {
+			CInfo = (Missile) (Cplus_List.get(j));
+			pan.drawImage(Cplus, CInfo.getX(), CInfo.getY(), win);
+			CInfo.enemy_move(Missile_speed);
+			if (CInfo.getX() < -20) {
+				Cplus_List.remove(j);
 			}
 		}
 	}
@@ -339,7 +302,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		// System.out.println(score+" "+time);
 	}
 
-	public Image GetImage() //
+	public Image GetImage() // Using timer
 	{
 		ran = rand.nextInt(50) + 1;
 		if (rand.nextInt(50) + 1 < ran)
@@ -372,7 +335,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 					g.drawImage(temp, 0, 0, null);
 				};
 			};
-			mon.init(650, 80, 10, rand.nextInt(30) + 10, win, rand.nextInt(3) + 1);
+			mon.init(650, 80, 10, rand.nextInt(30) + 10, win, 3);
 			mon.setBounds(mon.getX(), mon.getY(), 90, 90);
 			game.add(mon);
 			Mon_List.add(mon);
@@ -383,7 +346,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 					g.drawImage(temp, 0, 0, null);
 				};
 			};
-			mon.init(650, 180, 10, rand.nextInt(30) + 10, win, rand.nextInt(3) + 1);
+			mon.init(650, 180, 10, rand.nextInt(30) + 10, win, 3);
 			mon.setBounds(mon.getX(), mon.getY(), 90, 90);
 			game.add(mon);
 			Mon_List.add(mon);
@@ -394,7 +357,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 					g.drawImage(temp, 0, 0, null);
 				};
 			};
-			mon.init(650, 280, 10, rand.nextInt(30) + 10, win, rand.nextInt(3) + 1);
+			mon.init(650, 280, 10, rand.nextInt(30) + 10, win, 3);
 			mon.setBounds(mon.getX(), mon.getY(), 90, 90);
 			game.add(mon);
 			Mon_List.add(mon);
@@ -405,7 +368,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 					g.drawImage(temp, 0, 0, null);
 				};
 			};
-			mon.init(650, 380, 10, rand.nextInt(30) + 10, win, rand.nextInt(3) + 1);
+			mon.init(650, 380, 10, rand.nextInt(30) + 10, win, 3); // 3 + alpha
 			mon.setBounds(mon.getX(), mon.getY(), 90, 90);
 			game.add(mon);
 			Mon_List.add(mon);

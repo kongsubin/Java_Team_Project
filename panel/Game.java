@@ -58,7 +58,7 @@ public class Game extends JPanel implements Runnable{
 			game_th.start(); 
 			
 			user.init(0, 200, 1000, 10, win) ;
-			user.setBounds(user.getX(), user.getY(), 100, 100);
+			user.setBounds(user.getX(), user.getY(), 50, 50);
 			add(user) ;
 			
 			status[0] = new JLabel("Hp : ");

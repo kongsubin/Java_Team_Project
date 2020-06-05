@@ -1,10 +1,8 @@
 package panel;
 
-import javax.swing.JPanel;
-
 public class Missile {
-	public int x;
-	public int y; //
+	private int x ;
+	private int y ;
 
 	public Missile(int x, int y) {
 		this.x = x;
@@ -16,7 +14,7 @@ public class Missile {
 	}
 
 	public void enemy_move(int speed) { // enemy's missile move
-		x -= speed;
+		x -= speed ;
 	}
 
 	public int getX() {
@@ -31,7 +29,7 @@ public class Missile {
 		this.x = x;
 	}
 
-	public void setY(int x) {
+	public void setY(int y) {
 		this.y = y;
 	}
 }

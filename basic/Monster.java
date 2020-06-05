@@ -2,6 +2,7 @@ package basic;
 
 import main.Main_Frame;
 
+@SuppressWarnings("serial")
 public class Monster extends Basic {
 	private int speed ;
 	
