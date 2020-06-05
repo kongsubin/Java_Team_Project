@@ -36,7 +36,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private long seed = System.currentTimeMillis();
 	private Random rand = new Random(seed);
 	private int ran;
-	private int Missile_speed = 7 ;
+	private int Missile_speed = 6 ;
 
 	private boolean KeyUp = false;
 	private boolean KeyDown = false;
@@ -335,7 +335,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 					g.drawImage(temp, 0, 0, null);
 				};
 			};
-			mon.init(650, 80, 10, rand.nextInt(30) + 10, win, 3);
+			mon.init(650, 80, 10, rand.nextInt(30) + 10, win, rand.nextInt(3) + 1);
 			mon.setBounds(mon.getX(), mon.getY(), 90, 90);
 			game.add(mon);
 			Mon_List.add(mon);
@@ -346,7 +346,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 					g.drawImage(temp, 0, 0, null);
 				};
 			};
-			mon.init(650, 180, 10, rand.nextInt(30) + 10, win, 3);
+			mon.init(650, 180, 10, rand.nextInt(30) + 10, win, rand.nextInt(3) + 1);
 			mon.setBounds(mon.getX(), mon.getY(), 90, 90);
 			game.add(mon);
 			Mon_List.add(mon);
@@ -357,7 +357,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 					g.drawImage(temp, 0, 0, null);
 				};
 			};
-			mon.init(650, 280, 10, rand.nextInt(30) + 10, win, 3);
+			mon.init(650, 280, 10, rand.nextInt(30) + 10, win, rand.nextInt(3) + 1);
 			mon.setBounds(mon.getX(), mon.getY(), 90, 90);
 			game.add(mon);
 			Mon_List.add(mon);
@@ -368,7 +368,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 					g.drawImage(temp, 0, 0, null);
 				};
 			};
-			mon.init(650, 380, 10, rand.nextInt(30) + 10, win, 3); // 3 + alpha
+			mon.init(650, 380, 10, rand.nextInt(30) + 10, win, rand.nextInt(3) + 1); // 3 + alpha
 			mon.setBounds(mon.getX(), mon.getY(), 90, 90);
 			game.add(mon);
 			Mon_List.add(mon);
