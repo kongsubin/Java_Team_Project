@@ -45,7 +45,6 @@ public class EndGame extends JPanel{
 			scoreText.setFont(f);
 			add(scoreText);
 			
-			
 			jButton = new JButton("Back") ;
 			jButton.setSize(50, 20) ;
 			jButton.setLocation(490, 450) ;

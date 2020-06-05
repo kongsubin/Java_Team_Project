@@ -18,10 +18,12 @@ import basic.Basic;
 import basic.Monster;
 import main.Main;
 import main.Main_Frame;
+import manage.manage_data;
 import panel.EndGame;
 import panel.Game;
 import panel.Missile;
 import panel.Start;
+import manage.manage_data;
 
 @SuppressWarnings("serial")
 public class RunGame extends JFrame implements Runnable, KeyListener {
@@ -38,6 +40,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Random rand = new Random(seed);
 	private int ran;
 	private int Missile_speed = 6 ;
+	private manage_data result = new manage_data();
 
 	private boolean KeyUp = false;
 	private boolean KeyDown = false;
@@ -100,10 +103,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 				KeyProcess();
 				MissileProcess();
 				MonsterProcess();
-				EndGameProcess();
-				// Enemy_MissileProcess();
-				user.setLocation(user.getX(), user.getY());
 				Enemy_MissileProcess();
+				EndGameProcess();
+				user.setLocation(user.getX(), user.getY());
 				Thread.sleep(20);
 				cnt++;
 			}
@@ -264,7 +266,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			FInfo = (Missile) (Fplus_List.get(j));
 			pan.drawImage(Fplus, FInfo.getX(), FInfo.getY(), win);
 			FInfo.enemy_move(Missile_speed);
-			if (Crash(FInfo.getX(), FInfo.getY(), user, user, 40)) {
+			if (Crash(FInfo.getX()+50, FInfo.getY(), user, user, 40)) {
 				user.attack(5);
 				FInfo.setX(-30);
 			}
@@ -278,7 +280,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			DInfo = (Missile) (Dplus_List.get(j));
 			pan.drawImage(Dplus, DInfo.getX(), DInfo.getY(), win);
 			DInfo.enemy_move(Missile_speed);
-			if (Crash(DInfo.getX(), DInfo.getY(), user, user, 35)) {
+			if (Crash(DInfo.getX()+50, DInfo.getY(), user, user, 35)) {
 				user.attack(5);
 				DInfo.setX(-30);
 			}
@@ -291,7 +293,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			CInfo = (Missile) (Cplus_List.get(j));
 			pan.drawImage(Cplus, CInfo.getX(), CInfo.getY(), win);
 			CInfo.enemy_move(Missile_speed);
-			if (Crash(CInfo.getX(), CInfo.getY(), user, user, 30)) {
+			if (Crash(CInfo.getX()+50, CInfo.getY(), user, user, 30)) {
 				user.attack(5);
 				CInfo.setX(-30);
 			}
@@ -334,7 +336,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			mon.setX(mon.getX() - 2 - mon.getSpeed());
 			// System.out.println(mon.getX()+" "+mon.getY());
 			mon.setLocation(mon.getX(), mon.getY());
-			if (Crash(user.getX()+10, user.getY()+10, mon, user, 30)) {
+			if (Crash(user.getX()-10, user.getY()+10, mon, user, 30)) {
 				user.attack(mon.getDamage());
 			}
 			if (mon.getX() < -200)
@@ -388,12 +390,12 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			game.add(mon);
 			Mon_List.add(mon);
 
-			Enemy_MissileProcess(); // call Enemy's Missile Process
+			//Enemy_MissileProcess(); // call Enemy's Missile Process
 		}
 
 	}
 
-//	// 미사일, 객체(몬스터, 유저) 
+//	// 誘몄궗�씪, 媛앹껜(紐ъ뒪�꽣, �쑀��) 
 	private boolean Crash(int GradeX, int GradeY, Basic character, Basic attackChar, int range) {
 		if (MatchingPoint(GradeX, GradeY, character.getX(), character.getY(), 30, 90))
 			return true;
@@ -421,6 +423,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			((Game) game).kill();
 			win.endGame = new EndGame(win, temp) ;
 			win.change("End Game");
+			result.store_score(temp);
 		}
 	}
 
