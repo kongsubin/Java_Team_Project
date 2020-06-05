@@ -39,7 +39,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private long seed = System.currentTimeMillis();
 	private Random rand = new Random(seed);
 	private int ran;
-	private int Missile_speed = 6 ;
+	private int Missile_speed = 6;
 	private manage_data result = new manage_data();
 
 	private boolean KeyUp = false;
@@ -60,7 +60,8 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Missile FInfo;
 
 	private Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
-	// private Image Bplus = new ImageIcon(Start.class.getResource("../image/b_30.png")).getImage();
+	// private Image Bplus = new
+	// ImageIcon(Start.class.getResource("../image/b_30.png")).getImage();
 	private Image Cplus = new ImageIcon(Start.class.getResource("../image/c_30.png")).getImage();
 	private Image Dplus = new ImageIcon(Start.class.getResource("../image/d_35.png")).getImage();
 	private Image Fplus = new ImageIcon(Start.class.getResource("../image/f_40.png")).getImage();
@@ -229,8 +230,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	}
 
 	public void Enemy_MissileProcess() { // Enemy Missile Process
-		if(cnt % 100 == 0)
-		{
+		if (cnt % 100 == 0) {
 			for (int i = 0; i < Mon_List.size(); i++) {
 				switch (Mon_List.get(i).getDamage() / 10) {
 				case 3:
@@ -266,21 +266,21 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			FInfo = (Missile) (Fplus_List.get(j));
 			pan.drawImage(Fplus, FInfo.getX(), FInfo.getY(), win);
 			FInfo.enemy_move(Missile_speed);
-			if (Crash(FInfo.getX()+50, FInfo.getY(), user, user, 40)) {
+			if (Crash(FInfo.getX() + 50, FInfo.getY(), user, user, 40)) {
 				user.attack(5);
 				FInfo.setX(-30);
 			}
 			if (FInfo.getX() < -20) {
 				Fplus_List.remove(j);
 			}
-			
+
 		}
 
 		for (int j = 0; j < Dplus_List.size(); ++j) {
 			DInfo = (Missile) (Dplus_List.get(j));
 			pan.drawImage(Dplus, DInfo.getX(), DInfo.getY(), win);
 			DInfo.enemy_move(Missile_speed);
-			if (Crash(DInfo.getX()+50, DInfo.getY(), user, user, 35)) {
+			if (Crash(DInfo.getX() + 50, DInfo.getY(), user, user, 35)) {
 				user.attack(5);
 				DInfo.setX(-30);
 			}
@@ -293,7 +293,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			CInfo = (Missile) (Cplus_List.get(j));
 			pan.drawImage(Cplus, CInfo.getX(), CInfo.getY(), win);
 			CInfo.enemy_move(Missile_speed);
-			if (Crash(CInfo.getX()+50, CInfo.getY(), user, user, 30)) {
+			if (Crash(CInfo.getX() + 50, CInfo.getY(), user, user, 30)) {
 				user.attack(5);
 				CInfo.setX(-30);
 			}
@@ -336,8 +336,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			mon.setX(mon.getX() - 2 - mon.getSpeed());
 			// System.out.println(mon.getX()+" "+mon.getY());
 			mon.setLocation(mon.getX(), mon.getY());
-			if (Crash(user.getX()-10, user.getY()+10, mon, user, 30)) {
+			if (Crash(user.getX() + 10, user.getY() + 10, mon, user, 30) && mon.getChecking()) {
 				user.attack(mon.getDamage());
+				mon.setChecking(true);
 			}
 			if (mon.getX() < -200)
 				Mon_List.remove(i);
@@ -390,7 +391,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			game.add(mon);
 			Mon_List.add(mon);
 
-			//Enemy_MissileProcess(); // call Enemy's Missile Process
+			// Enemy_MissileProcess(); // call Enemy's Missile Process
 		}
 
 	}
@@ -415,13 +416,13 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			return true;
 		return false;
 	}
-	
+
 	private void EndGameProcess() {
-		if(user.getHp() < 0) {
+		if (user.getHp() < 0) {
 			int temp = score;
 			kill();
 			((Game) game).kill();
-			win.endGame = new EndGame(win, temp) ;
+			win.endGame = new EndGame(win, temp);
 			win.change("End Game");
 			result.store_score(temp);
 		}
