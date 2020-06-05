@@ -24,6 +24,7 @@ import panel.Game;
 import panel.Missile;
 import panel.Start;
 import manage.manage_data;
+import Timer.Time;
 
 @SuppressWarnings("serial")
 public class RunGame extends JFrame implements Runnable, KeyListener {
@@ -58,7 +59,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Missile CInfo;
 	private Missile DInfo;
 	private Missile FInfo;
-
+	
 	private Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
 	// private Image Bplus = new
 	// ImageIcon(Start.class.getResource("../image/b_30.png")).getImage();
@@ -72,6 +73,10 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Image mon2 = new ImageIcon(Game.class.getResource("../Image/monster2.png")).getImage();
 	private Image mon3 = new ImageIcon(Game.class.getResource("../Image/monster3.png")).getImage();
 	private Image temp;
+	public long startTime=2*60*1000+System.currentTimeMillis();
+	private final java.text.SimpleDateFormat timerFormat = new java.text.SimpleDateFormat("mm : ss : SSS");
+	private long elapsed;
+
 
 	@SuppressWarnings("unused")
 	private Graphics pan;
@@ -98,9 +103,10 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	public void run() {
 		// TODO Auto-generated method stub
 		System.out.println("thread create!");
+		Time timer = new Time();
 		try {
 			while (repeat) {
-				show_status();
+				show_status(startTime- System.currentTimeMillis());
 				KeyProcess();
 				MissileProcess();
 				MonsterProcess();
@@ -303,14 +309,15 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 	}
 
-	public void show_status() {
+	public void show_status(long elapsed) {
 
 		status[0].setText("HP : " + user.getHp());
 		if (user.getHp() <= 100) {
 			status[0].setForeground(Color.RED);
 		}
 		status[1].setText("Score : " + score);
-		status[2].setText("Time : " + time);
+		status[2].setText("Time : " + timerFormat.format(elapsed));
+
 		/*
 		 * for(int i = 0; i < 3; i++) { board[i].setLocation(450,0+20*i); }
 		 */
