@@ -18,6 +18,7 @@ import basic.Basic;
 import basic.Monster;
 import main.Main;
 import main.Main_Frame;
+import panel.EndGame;
 import panel.Game;
 import panel.Missile;
 import panel.Start;
@@ -99,6 +100,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 				KeyProcess();
 				MissileProcess();
 				MonsterProcess();
+				EndGameProcess();
 				// Enemy_MissileProcess();
 				user.setLocation(user.getX(), user.getY());
 				Enemy_MissileProcess();
@@ -262,15 +264,24 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			FInfo = (Missile) (Fplus_List.get(j));
 			pan.drawImage(Fplus, FInfo.getX(), FInfo.getY(), win);
 			FInfo.enemy_move(Missile_speed);
+			if (Crash(FInfo.getX(), FInfo.getY(), user, user, 40)) {
+				user.attack(5);
+				FInfo.setX(-30);
+			}
 			if (FInfo.getX() < -20) {
 				Fplus_List.remove(j);
 			}
+			
 		}
 
 		for (int j = 0; j < Dplus_List.size(); ++j) {
 			DInfo = (Missile) (Dplus_List.get(j));
 			pan.drawImage(Dplus, DInfo.getX(), DInfo.getY(), win);
 			DInfo.enemy_move(Missile_speed);
+			if (Crash(DInfo.getX(), DInfo.getY(), user, user, 35)) {
+				user.attack(5);
+				DInfo.setX(-30);
+			}
 			if (DInfo.getX() < -20) {
 				Dplus_List.remove(j);
 			}
@@ -280,6 +291,10 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			CInfo = (Missile) (Cplus_List.get(j));
 			pan.drawImage(Cplus, CInfo.getX(), CInfo.getY(), win);
 			CInfo.enemy_move(Missile_speed);
+			if (Crash(CInfo.getX(), CInfo.getY(), user, user, 30)) {
+				user.attack(5);
+				CInfo.setX(-30);
+			}
 			if (CInfo.getX() < -20) {
 				Cplus_List.remove(j);
 			}
@@ -319,7 +334,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			mon.setX(mon.getX() - 2 - mon.getSpeed());
 			// System.out.println(mon.getX()+" "+mon.getY());
 			mon.setLocation(mon.getX(), mon.getY());
-			if (Crash(mon.getX(), mon.getY(), user, mon, 80)) {
+			if (Crash(user.getX()+10, user.getY()+10, mon, user, 30)) {
 				user.attack(mon.getDamage());
 			}
 			if (mon.getX() < -200)
@@ -397,6 +412,16 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 				&& (charPointY < msPointY && msPointY < charPointY + charLen))
 			return true;
 		return false;
+	}
+	
+	private void EndGameProcess() {
+		if(user.getHp() < 0) {
+			int temp = score;
+			kill();
+			((Game) game).kill();
+			win.endGame = new EndGame(win, temp) ;
+			win.change("End Game");
+		}
 	}
 
 }

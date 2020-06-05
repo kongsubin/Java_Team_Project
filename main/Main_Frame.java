@@ -2,6 +2,7 @@ package main;
 import javax.swing.* ;
 
 import panel.Desc;
+import panel.EndGame;
 import panel.Game;
 import panel.Record;
 import panel.Start;
@@ -12,6 +13,7 @@ public class Main_Frame extends JFrame{
 	public Game game = null ;
 	public Desc desc = null ;
 	public Record record = null ;
+	public EndGame endGame = null ;
 
 	public void change(String PName)
 	{
@@ -40,6 +42,12 @@ public class Main_Frame extends JFrame{
 		{
 			getContentPane().removeAll() ;
 			getContentPane().add(record) ;
+			revalidate() ;
+			repaint() ;
+		}else if(PName.equals("End Game"))
+		{
+			getContentPane().removeAll() ;
+			getContentPane().add(endGame) ;
 			revalidate() ;
 			repaint() ;
 		}

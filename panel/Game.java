@@ -124,6 +124,7 @@ public class Game extends JPanel implements Runnable{
 	public void kill() {
 		System.out.println("game thread kill!");
 		//game_th.interrupt();
+		clip.stop() ;
 		repeat = false;
 	}
 	
