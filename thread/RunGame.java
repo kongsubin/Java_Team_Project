@@ -147,12 +147,12 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			System.out.println("attack");
 		}
 
-		if (user.getX() > Main.SCREEN_WIDTH - 80)
-			user.setX(Main.SCREEN_WIDTH - 80);
-		if (user.getX() < -20)
-			user.setX(-20);
-		if (user.getY() > Main.SCREEN_HEIGHT - 120)
-			user.setY(Main.SCREEN_HEIGHT - 120);
+		if (user.getX() > Main.SCREEN_WIDTH - 25)
+			user.setX(Main.SCREEN_WIDTH - 25);
+		if (user.getX() < -15)
+			user.setX(-15);
+		if (user.getY() > Main.SCREEN_HEIGHT - 60)
+			user.setY(Main.SCREEN_HEIGHT - 60);
 		if (user.getY() < 0)
 			user.setY(0);
 
@@ -219,8 +219,8 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			AInfo.move();
 			for (int j = 0; j < Mon_List.size(); ++j) {
 				mon = (Monster) (Mon_List.get(j));
-				if (Crash(AInfo.getX(), AInfo.getY(), mon, user, 30)) {
-					System.out.println(mon.getHp());
+				if (Crash(AInfo.getX() + 3, AInfo.getY() + 3, mon, user, 30, 90)) {
+					System.out.println("a - mon");
 					if (mon.getHp() <= 0) {
 						mon.setX(-300);
 					}
@@ -272,8 +272,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			FInfo = (Missile) (Fplus_List.get(j));
 			pan.drawImage(Fplus, FInfo.getX(), FInfo.getY(), win);
 			FInfo.enemy_move(Missile_speed);
-			if (Crash(FInfo.getX() + 50, FInfo.getY(), user, user, 40)) {
-				user.attack(5);
+			if (Crash(FInfo.getX(), FInfo.getY(), user, user, 40, 50)) {
+				System.out.println("user - f");
+				user.attack(20);
 				FInfo.setX(-30);
 			}
 			if (FInfo.getX() < -20) {
@@ -286,8 +287,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			DInfo = (Missile) (Dplus_List.get(j));
 			pan.drawImage(Dplus, DInfo.getX(), DInfo.getY(), win);
 			DInfo.enemy_move(Missile_speed);
-			if (Crash(DInfo.getX() + 50, DInfo.getY(), user, user, 35)) {
-				user.attack(5);
+			if (Crash(DInfo.getX(), DInfo.getY(), user, user, 35, 50)) {
+				System.out.println("user - d");
+				user.attack(15);
 				DInfo.setX(-30);
 			}
 			if (DInfo.getX() < -20) {
@@ -299,8 +301,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			CInfo = (Missile) (Cplus_List.get(j));
 			pan.drawImage(Cplus, CInfo.getX(), CInfo.getY(), win);
 			CInfo.enemy_move(Missile_speed);
-			if (Crash(CInfo.getX() + 50, CInfo.getY(), user, user, 30)) {
-				user.attack(5);
+			if (Crash(CInfo.getX(), CInfo.getY(), user, user, 30, 50)) {
+				System.out.println("user - c");
+				user.attack(10);
 				CInfo.setX(-30);
 			}
 			if (CInfo.getX() < -20) {
@@ -317,6 +320,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 		status[1].setText("Score : " + score);
 		status[2].setText("Time : " + timerFormat.format(elapsed));
+		//System.out.println(elapsed);
 
 		/*
 		 * for(int i = 0; i < 3; i++) { board[i].setLocation(450,0+20*i); }
@@ -341,9 +345,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		for (int i = 0; i < Mon_List.size(); ++i) {
 			mon = (Monster) (Mon_List.get(i));
 			mon.setX(mon.getX() - 2 - mon.getSpeed());
-			// System.out.println(mon.getX()+" "+mon.getY());
 			mon.setLocation(mon.getX(), mon.getY());
-			if (Crash(user.getX() + 10, user.getY() + 10, mon, user, 30) && mon.getChecking()) {
+			if (Crash(user.getX(), user.getY(), mon, user, 50, 90) && !mon.getChecking()) {
+				System.out.println("user - mon");
 				user.attack(mon.getDamage());
 				mon.setChecking(true);
 			}
@@ -404,14 +408,14 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	}
 
 //	// 誘몄궗�씪, 媛앹껜(紐ъ뒪�꽣, �쑀��) 
-	private boolean Crash(int GradeX, int GradeY, Basic character, Basic attackChar, int range) {
-		if (MatchingPoint(GradeX, GradeY, character.getX(), character.getY(), 30, 90))
+	private boolean Crash(int GradeX, int GradeY, Basic character, Basic attackChar, int range, int size) {
+		if (MatchingPoint(GradeX, GradeY, character.getX(), character.getY(), 30, size))
 			return true;
-		else if (MatchingPoint(GradeX + range, GradeY, character.getX(), character.getY(), 30, 90))
+		else if (MatchingPoint(GradeX + range, GradeY, character.getX(), character.getY(), 30, size))
 			return true;
-		else if (MatchingPoint(GradeX, GradeY + range, character.getX(), character.getY(), 30, 90))
+		else if (MatchingPoint(GradeX, GradeY + range, character.getX(), character.getY(), 30, size))
 			return true;
-		else if (MatchingPoint(GradeX + range, GradeY + range, character.getX(), character.getY(), 30, 90))
+		else if (MatchingPoint(GradeX + range, GradeY + range, character.getX(), character.getY(), 30, size))
 			return true;
 		else
 			return false;
@@ -429,7 +433,15 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			int temp = score;
 			kill();
 			((Game) game).kill();
-			win.endGame = new EndGame(win, temp);
+			win.endGame = new EndGame(win, temp, "HP");
+			win.change("End Game");
+			result.store_score(temp);
+		}
+		if (elapsed < 0) {
+			int temp = score;
+			kill();
+			((Game) game).kill();
+			win.endGame = new EndGame(win, temp, "TIME");
 			win.change("End Game");
 			result.store_score(temp);
 		}
