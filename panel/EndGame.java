@@ -24,18 +24,25 @@ public class EndGame extends JPanel{
 	private JLabel scoreText;
 	private int score = 0;
 	
-	private Image dead = new ImageIcon(Start.class.getResource("../image/dead_image.jpg")).getImage() ;
+	private Image endBackground ;
 	
-	public EndGame(Main_Frame win, int score){
+	public EndGame(Main_Frame win, int score, String type){
 			this.win = win ;
 			this.score = score;
 			setLayout(null) ;
 			
 			String path = Start.class.getResource("").getPath();
-			File music = new File(path + "bgm/dead_bgm.wav") ;
-			Play(music , true) ;
+			if(type.equals("HP")) {
+				endBackground = new ImageIcon(Start.class.getResource("../image/dead_image.jpg")).getImage() ;
+				File music = new File(path + "bgm/dead_bgm.wav") ;
+				Play(music , true) ;
+			}
+			else if(type.equals("TIME")) {
+				endBackground = new ImageIcon(Start.class.getResource("../image/end_image.jpg")).getImage() ;
+				File music = new File(path + "bgm/dead_bgm.wav") ;
+				Play(music , true) ;
+			}
 
-			String stScore = Integer.toString(score);
 			scoreText = new JLabel("Your Score is " + score); 
 			System.out.println(score);
 			scoreText.setSize(300,100);
@@ -55,7 +62,7 @@ public class EndGame extends JPanel{
 
 	public void paintComponent(Graphics g)
 	{
-		g.drawImage(dead, 0, 0, win) ;
+		g.drawImage(endBackground, 0, 0, win) ;
 		setOpaque(false) ;
 		super.paintComponent(g);
 	}
