@@ -33,7 +33,7 @@ public class EndGame extends JPanel{
 			
 			String path = Start.class.getResource("").getPath();
 			if(type.equals("HP")) {
-				endBackground = new ImageIcon(Start.class.getResource("../image/dead_image.jpg")).getImage() ;
+				endBackground = new ImageIcon(Start.class.getResource("../image/dead2_image.jpg")).getImage() ;
 				File music = new File(path + "bgm/dead_bgm.wav") ;
 				Play(music , true) ;
 			}
