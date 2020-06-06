@@ -39,7 +39,7 @@ public class EndGame extends JPanel{
 			}
 			else if(type.equals("TIME")) {
 				endBackground = new ImageIcon(Start.class.getResource("../image/end_image.jpg")).getImage() ;
-				File music = new File(path + "bgm/dead_bgm.wav") ;
+				File music = new File(path + "bgm/end_bgm.wav") ;
 				Play(music , true) ;
 			}
 

@@ -75,7 +75,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Image temp;
 	public long startTime=2*60*1000+System.currentTimeMillis();
 	private final java.text.SimpleDateFormat timerFormat = new java.text.SimpleDateFormat("mm : ss : SSS");
-	private long elapsed;
+	private long elapsed = 1;
 
 
 	@SuppressWarnings("unused")
@@ -106,7 +106,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		Time timer = new Time();
 		try {
 			while (repeat) {
-				show_status(startTime- System.currentTimeMillis());
+				show_status(startTime - System.currentTimeMillis());
 				KeyProcess();
 				MissileProcess();
 				MonsterProcess();
@@ -320,7 +320,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 		status[1].setText("Score : " + score);
 		status[2].setText("Time : " + timerFormat.format(elapsed));
-		//System.out.println(elapsed);
+		System.out.println(elapsed);
+		if(elapsed <= 0)
+			elapsed = 0;
 
 		/*
 		 * for(int i = 0; i < 3; i++) { board[i].setLocation(450,0+20*i); }
@@ -437,7 +439,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			win.change("End Game");
 			result.store_score(temp);
 		}
-		if (elapsed < 0) {
+		if (elapsed <= 0 || startTime - System.currentTimeMillis() <= 0) {
 			int temp = score;
 			kill();
 			((Game) game).kill();
