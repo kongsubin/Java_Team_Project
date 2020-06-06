@@ -24,7 +24,7 @@ import panel.Game;
 import panel.Missile;
 import panel.Start;
 import manage.manage_data;
-import Timer.Time;
+//import Timer.Time;
 
 @SuppressWarnings("serial")
 public class RunGame extends JFrame implements Runnable, KeyListener {
@@ -33,8 +33,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Main_Frame win;
 	private Basic user;
 	private JLabel[] status = new JLabel[3]; // score board (Hp, score, time)
-	private int score = 0; // test variable
-	private int time = 0; // test variable
+	private int score;
 	private boolean repeat = true;
 	private int cnt = 0;
 	private long seed = System.currentTimeMillis();
@@ -73,10 +72,11 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Image mon2 = new ImageIcon(Game.class.getResource("../Image/monster2.png")).getImage();
 	private Image mon3 = new ImageIcon(Game.class.getResource("../Image/monster3.png")).getImage();
 	private Image temp;
-	public long startTime=2*60*1000+System.currentTimeMillis();
+	public long startTime=3*60*1000+System.currentTimeMillis();
 	private final java.text.SimpleDateFormat timerFormat = new java.text.SimpleDateFormat("mm : ss : SSS");
 	private long elapsed = 1;
-
+	private int loop; // control monster's missile loop
+	int did; // if monster's missile loop is reduced did = 1;
 
 	@SuppressWarnings("unused")
 	private Graphics pan;
@@ -85,6 +85,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		this.win = win;
 		this.user = p;
 		this.game = game;
+		score = 0; // initial score
+		loop = 80; // initial loop for monster's missile loop
+		did = 0; // initial did for monster's missile loop's change
 
 		for (int i = 0; i < 3; i++) {
 			this.status[i] = status[i]; // store in board
@@ -103,7 +106,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	public void run() {
 		// TODO Auto-generated method stub
 		System.out.println("thread create!");
-		Time timer = new Time();
+		//Time timer = new Time();
 		try {
 			while (repeat) {
 				show_status(startTime - System.currentTimeMillis());
@@ -212,6 +215,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		if (KeySpace) {
 			AInfo = new Missile(user.getX() + 10, user.getY() + 15);
 			Aplus_List.add(AInfo);
+			KeySpace = false; // continue to press spacebar is banned.
 		}
 
 		for (int i = 0; i < Aplus_List.size(); ++i) {
@@ -223,6 +227,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 					System.out.println("a - mon");
 					if (mon.getHp() <= 0) {
 						mon.setX(-300);
+						score += 100; // kill monster get score 100
 					}
 					mon.attack(user.getDamage());
 					AInfo.setX(600);
@@ -236,8 +241,8 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	}
 
 	public void Enemy_MissileProcess() { // Enemy Missile Process
-		if (cnt % 100 == 0) {
-			for (int i = 0; i < Mon_List.size(); i++) {
+		if (cnt % loop == 0) {
+			for (int i = 0; i < Mon_List.size() && Mon_List.get(i).getX() <= 550; i++) { // 미사일이 몬스터 등장한 후 나옴
 				switch (Mon_List.get(i).getDamage() / 10) {
 				case 3:
 					FInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
@@ -313,23 +318,27 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	}
 
 	public void show_status(long elapsed) {
-
+		
 		status[0].setText("HP : " + user.getHp());
 		if (user.getHp() <= 100) {
 			status[0].setForeground(Color.RED);
 		}
 		status[1].setText("Score : " + score);
 		status[2].setText("Time : " + timerFormat.format(elapsed));
-		System.out.println(elapsed);
-		if(elapsed <= 0)
+		System.out.println(elapsed/1000);
+		
+		if(elapsed <= 0) {
 			elapsed = 0;
+		}
+		
+		else if ((elapsed / 1000) % 30 == 0 && did == 0) { // every 30seconds missile's loop -= 10
+			loop -= 10;
+			did = 1;
 
-		/*
-		 * for(int i = 0; i < 3; i++) { board[i].setLocation(450,0+20*i); }
-		 */
-		score += 1;
-		time += 1;
-		// System.out.println(score+" "+time);
+		}
+		else if ((elapsed / 1000) % 30 != 0 && did == 1){
+			did = 0;
+		}
 	}
 
 	public Image GetImage() // Using timer
@@ -404,7 +413,6 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			game.add(mon);
 			Mon_List.add(mon);
 
-			// Enemy_MissileProcess(); // call Enemy's Missile Process
 		}
 
 	}

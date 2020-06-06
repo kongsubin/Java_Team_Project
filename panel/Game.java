@@ -57,7 +57,7 @@ public class Game extends JPanel implements Runnable{
 			game_th =  new Thread(this); 
 			game_th.start(); 
 			
-			user.init(0, 200, 1000, 10, win) ;
+			user.init(0, 200, 500, 10, win) ;
 			user.setBounds(user.getX(), user.getY(), 50, 50);
 			add(user) ;
 			
@@ -66,8 +66,8 @@ public class Game extends JPanel implements Runnable{
 			status[2] = new JLabel("Time : ");
 			
 			for(int i = 0; i < 3; i++) {
-				status[i].setSize(100,15);
-				status[i].setLocation(450,0+20*i);
+				status[i].setSize(110,15);
+				status[i].setLocation(415,0+20*i);
 				status[i].setForeground(Color.WHITE);
 				add(status[i]);
 			}
