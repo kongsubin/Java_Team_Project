@@ -76,6 +76,8 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private int loop; // control monster's missile loop
 	int did; // if monster's missile loop is reduced did = 1;
 
+	private manage_data result = new manage_data();
+	
 	@SuppressWarnings("unused")
 	private Graphics pan;
 
@@ -439,6 +441,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private void EndGameProcess() {
 		if (user.getHp() < 0) {
 			int temp = score;
+			result.store_score(score - 1000); // store score
 			kill();
 			((Game) game).kill();
 			win.endGame = new EndGame(win, temp, "HP");
@@ -446,6 +449,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 		if (elapsed <= 0 || startTime - System.currentTimeMillis() <= 0) {
 			int temp = score;
+			result.store_score(score - 1000); // store score
 			kill();
 			((Game) game).kill();
 			win.endGame = new EndGame(win, temp, "TIME");

@@ -49,10 +49,8 @@ public class EndGame extends JPanel{
 				scoreText = new JLabel("Your Score is " + score + " + 1000"); 
 				score += 1000;
 			}
-			
-			result.store_score(score); // store score
-			
-			System.out.println(score);
+
+			//System.out.println(score);
 			scoreText.setSize(400,100);
 			scoreText.setLocation(110,150);
 			scoreText.setForeground(Color.WHITE);
@@ -62,6 +60,7 @@ public class EndGame extends JPanel{
 
 			
 			String grade= result.get_grade(score); // get grade
+			//String grade = Grade(score); 
 			gradeText = new JLabel("Your Grade is " + grade); 
 			gradeText.setSize(400,100);
 			gradeText.setLocation(160,200);
@@ -106,24 +105,5 @@ public class EndGame extends JPanel{
 				win.change("Start") ;
 			}
 	}
-	/*public String Grade(int score) { // get grade
-		if(score >= 7000) {
-			return "A+";
-		}
-		else if (score >= 6000) {
-			return "A";
-		}
-		else if (score >= 5000) {
-			return "B";
-		}
-		else if (score >= 4000) {
-			return "C";
-		}
-		else if (score >= 3000) {
-			return "D";
-		}
-		else {
-			return "F";
-		}
-	}*/
-}	
+	
+}
