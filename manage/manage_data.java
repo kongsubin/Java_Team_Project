@@ -99,19 +99,19 @@ public class manage_data {
 	}
 	
 	public String get_grade(int score) { // get grade
-		if(score >= 10000) {
+		if(score >= 7000) {
 			return "A+";
 		}
-		else if (score >= 9000) {
+		else if (score >= 6000) {
 			return "A";
 		}
-		else if (score >= 8000) {
+		else if (score >= 5000) {
 			return "B";
 		}
-		else if (score >= 7000) {
+		else if (score >= 4000) {
 			return "C";
 		}
-		else if (score >= 6000) {
+		else if (score >= 3000) {
 			return "D";
 		}
 		else {
