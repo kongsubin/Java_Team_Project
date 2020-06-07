@@ -449,7 +449,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 		if (elapsed <= 0 || startTime - System.currentTimeMillis() <= 0) {
 			int temp = score;
-			result.store_score(score - 1000); // store score
+			result.store_score(score + 1000); // store score
 			kill();
 			((Game) game).kill();
 			win.endGame = new EndGame(win, temp, "TIME");
