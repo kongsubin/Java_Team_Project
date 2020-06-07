@@ -53,7 +53,7 @@ public class manage_data {
 		
 		for(i = 0; i < 10 && score_list[i] != -1; i++) {
 			grade = get_grade(score_list[i]);
-			outputStream.println(i+1+"                    "+grade+"                    "+score_list[i]);
+			outputStream.println(i+1+"                       "+grade+"                       "+score_list[i]);
 		}
 		outputStream.close();
 	}
@@ -74,7 +74,7 @@ public class manage_data {
 			i = 0;
 			String line = inputStream.nextLine();
 			while(i < 3) {
-				file_score = line.split("                    ");
+				file_score = line.split("                       ");
 				i++;
 			}
 			score_list[k++] = Integer.parseInt(file_score[2]);
@@ -105,11 +105,20 @@ public class manage_data {
 		else if (score >= 6000) {
 			return "A";
 		}
+		else if (score >= 5500) {
+			return "B+";
+		}
 		else if (score >= 5000) {
 			return "B";
 		}
+		else if (score >= 4500) {
+			return "C+";
+		}
 		else if (score >= 4000) {
 			return "C";
+		}
+		else if (score >= 3500) {
+			return "D+";
 		}
 		else if (score >= 3000) {
 			return "D";

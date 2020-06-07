@@ -1,6 +1,7 @@
 package panel;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent ;
@@ -34,10 +35,12 @@ public class Record extends JPanel{
 			jButton.setLocation(490, 450) ;
 			add(jButton) ;
 			
-			label = new JLabel("Ranking         Grade       Score");
-			label.setSize(200,20);
-			label.setLocation(175,50);
+			label = new JLabel("Ranking            Grade               Score");
+			label.setSize(400,30);
+			label.setLocation(110,50);
 			label.setForeground(Color.WHITE);
+			Font f = new Font("Serif", Font.BOLD+Font.ITALIC, 20);
+			label.setFont(f);
 			add(label);
 			
 
@@ -61,9 +64,11 @@ public class Record extends JPanel{
 		for(i = 0; i < line.length; i++) { // show ranking newly on screen
 			System.out.println(line[i]);
 			scores[i] = new JLabel(line[i]);
-			scores[i].setSize(200,10);
-			scores[i].setLocation(175,100+i*20);
+			scores[i].setSize(300,17);
+			scores[i].setLocation(140,100+i*20);
 			scores[i].setForeground(Color.WHITE);
+			Font f = new Font("Serif", Font.BOLD+Font.ITALIC, 17);
+			scores[i].setFont(f);
 			add(scores[i]);
 		}
 		rankings = i;

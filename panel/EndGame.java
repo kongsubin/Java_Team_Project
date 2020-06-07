@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.Main_Frame;
+import manage.manage_data;
 
 @SuppressWarnings("serial")
 public class EndGame extends JPanel{
@@ -24,6 +25,7 @@ public class EndGame extends JPanel{
 	private JLabel scoreText;
 	private JLabel gradeText;
 	private int score = 0;
+	private manage_data result = new manage_data();
 	
 	private Image endBackground ;
 	
@@ -47,9 +49,11 @@ public class EndGame extends JPanel{
 				scoreText = new JLabel("Your Score is " + score + " + 1000"); 
 				score += 1000;
 			}
-
+			
+			result.store_score(score); // store score
+			
 			System.out.println(score);
-			scoreText.setSize(300,100);
+			scoreText.setSize(400,100);
 			scoreText.setLocation(110,150);
 			scoreText.setForeground(Color.WHITE);
 			Font f = new Font("Serif", Font.BOLD+Font.ITALIC, 28);
@@ -57,9 +61,9 @@ public class EndGame extends JPanel{
 			add(scoreText);
 
 			
-			String grade= Grade(score);
+			String grade= result.get_grade(score); // get grade
 			gradeText = new JLabel("Your Grade is " + grade); 
-			gradeText.setSize(300,100);
+			gradeText.setSize(400,100);
 			gradeText.setLocation(160,200);
 			gradeText.setForeground(Color.WHITE);
 			gradeText.setFont(f);
@@ -102,7 +106,7 @@ public class EndGame extends JPanel{
 				win.change("Start") ;
 			}
 	}
-	public String Grade(int score) { // get grade
+	/*public String Grade(int score) { // get grade
 		if(score >= 7000) {
 			return "A+";
 		}
@@ -121,5 +125,5 @@ public class EndGame extends JPanel{
 		else {
 			return "F";
 		}
-	}
+	}*/
 }	

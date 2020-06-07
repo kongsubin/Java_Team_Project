@@ -23,7 +23,6 @@ import panel.EndGame;
 import panel.Game;
 import panel.Missile;
 import panel.Start;
-import manage.manage_data;
 //import Timer.Time;
 
 @SuppressWarnings("serial")
@@ -40,7 +39,6 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Random rand = new Random(seed);
 	private int ran;
 	private int Missile_speed = 6;
-	private manage_data result = new manage_data();
 
 	private boolean KeyUp = false;
 	private boolean KeyDown = false;
@@ -72,7 +70,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Image mon2 = new ImageIcon(Game.class.getResource("../Image/monster2.png")).getImage();
 	private Image mon3 = new ImageIcon(Game.class.getResource("../Image/monster3.png")).getImage();
 	private Image temp;
-	public long startTime=3*60*1000+System.currentTimeMillis();
+	public long startTime=2*60*1000+System.currentTimeMillis();
 	private final java.text.SimpleDateFormat timerFormat = new java.text.SimpleDateFormat("mm : ss : SSS");
 	private long elapsed = 1;
 	private int loop; // control monster's missile loop
@@ -445,7 +443,6 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			((Game) game).kill();
 			win.endGame = new EndGame(win, temp, "HP");
 			win.change("End Game");
-			result.store_score(temp);
 		}
 		if (elapsed <= 0 || startTime - System.currentTimeMillis() <= 0) {
 			int temp = score;
@@ -453,7 +450,6 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 			((Game) game).kill();
 			win.endGame = new EndGame(win, temp, "TIME");
 			win.change("End Game");
-			result.store_score(temp);
 		}
 	}
 
