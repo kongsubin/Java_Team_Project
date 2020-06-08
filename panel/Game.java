@@ -80,7 +80,6 @@ public class Game extends JPanel implements Runnable{
 		pan.drawImage(background, 0, 0, win) ;
 		running.Draw_Missile(pan);
 		running.Draw_Enemy_Missile(pan); // Draw Enemy Missile
-		//g.drawImage(background, 0, 0, win) ;
 		setOpaque(false) ;
 		super.paintComponent(pan);
 	}
@@ -123,7 +122,6 @@ public class Game extends JPanel implements Runnable{
 	}
 	public void kill() {
 		System.out.println("game thread kill!");
-		//game_th.interrupt();
 		clip.stop() ;
 		repeat = false;
 	}

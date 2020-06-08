@@ -52,14 +52,11 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private ArrayList<Missile> Fplus_List = new ArrayList<>();
 
 	private Missile AInfo;
-	// private Missile BInfo;
 	private Missile CInfo;
 	private Missile DInfo;
 	private Missile FInfo;
 	
 	private Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
-	// private Image Bplus = new
-	// ImageIcon(Start.class.getResource("../image/b_30.png")).getImage();
 	private Image Cplus = new ImageIcon(Start.class.getResource("../image/c_30.png")).getImage();
 	private Image Dplus = new ImageIcon(Start.class.getResource("../image/d_35.png")).getImage();
 	private Image Fplus = new ImageIcon(Start.class.getResource("../image/f_40.png")).getImage();
@@ -74,7 +71,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private final java.text.SimpleDateFormat timerFormat = new java.text.SimpleDateFormat("mm : ss : SSS");
 	private long elapsed = 1;
 	private int loop; // control monster's missile loop
-	int did; // if monster's missile loop is reduced did = 1;
+	private int did; // if monster's missile loop is reduced did = 1;
 
 	private manage_data result = new manage_data();
 	
@@ -115,7 +112,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 				MonsterProcess();
 				Enemy_MissileProcess();
 				EndGameProcess();
-				user.setLocation(user.getX(), user.getY());
+				
 				Thread.sleep(20);
 				cnt++;
 			}
@@ -215,7 +212,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		if (KeySpace) {
 			AInfo = new Missile(user.getX() + 10, user.getY() + 15);
 			Aplus_List.add(AInfo);
-			KeySpace = false; // continue to press spacebar is banned.
+			KeySpace = false; // continue to press space bar is banned.
 		}
 
 		for (int i = 0; i < Aplus_List.size(); ++i) {
@@ -267,7 +264,6 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	public void Draw_Missile(Graphics pan) {
 		for (int i = 0; i < Aplus_List.size(); ++i) {
 			AInfo = (Missile) (Aplus_List.get(i));
-			// System.out.println(AInfo.x + " "+AInfo.y);
 			pan.drawImage(Aplus, AInfo.getX(), AInfo.getY(), win);
 		}
 	}
