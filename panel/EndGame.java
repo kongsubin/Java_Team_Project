@@ -24,6 +24,7 @@ public class EndGame extends JPanel{
 	private Clip clip ;
 	private JLabel scoreText;
 	private JLabel gradeText;
+	@SuppressWarnings("unused")
 	private int score = 0;
 	private manage_data result = new manage_data();
 	
@@ -50,7 +51,6 @@ public class EndGame extends JPanel{
 				score += 1000;
 			}
 
-			//System.out.println(score);
 			scoreText.setSize(400,100);
 			scoreText.setLocation(110,150);
 			scoreText.setForeground(Color.WHITE);
@@ -60,7 +60,6 @@ public class EndGame extends JPanel{
 
 			
 			String grade= result.get_grade(score); // get grade
-			//String grade = Grade(score); 
 			gradeText = new JLabel("Your Grade is " + grade); 
 			gradeText.setSize(400,100);
 			gradeText.setLocation(160,200);

@@ -10,13 +10,9 @@ public class Missile {
 	}
 
 	public void move() {
-		x += 30;
+		this.x += 30;
 	}
-
-	public void enemy_move(int speed) { // enemy's missile move
-		x -= speed ;
-	}
-
+	
 	public int getX() {
 		return this.x;
 	}

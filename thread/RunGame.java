@@ -10,7 +10,6 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-// import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,9 +20,9 @@ import main.Main_Frame;
 import manage.manage_data;
 import panel.EndGame;
 import panel.Game;
+import panel.M_Missile;
 import panel.Missile;
 import panel.Start;
-//import Timer.Time;
 
 @SuppressWarnings("serial")
 public class RunGame extends JFrame implements Runnable, KeyListener {
@@ -39,6 +38,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Random rand = new Random(seed);
 	private int ran;
 	private int Missile_speed = 6;
+	private boolean check = true;
 
 	private boolean KeyUp = false;
 	private boolean KeyDown = false;
@@ -47,14 +47,14 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private boolean KeySpace = false;
 
 	private ArrayList<Missile> Aplus_List = new ArrayList<>();
-	private ArrayList<Missile> Cplus_List = new ArrayList<>();
-	private ArrayList<Missile> Dplus_List = new ArrayList<>();
-	private ArrayList<Missile> Fplus_List = new ArrayList<>();
+	private ArrayList<M_Missile> Cplus_List = new ArrayList<>();
+	private ArrayList<M_Missile> Dplus_List = new ArrayList<>();
+	private ArrayList<M_Missile> Fplus_List = new ArrayList<>();
 
 	private Missile AInfo;
-	private Missile CInfo;
-	private Missile DInfo;
-	private Missile FInfo;
+	private M_Missile CInfo;
+	private M_Missile DInfo;
+	private M_Missile FInfo;
 	
 	private Image Aplus = new ImageIcon(Start.class.getResource("../image/a_30.png")).getImage();
 	private Image Cplus = new ImageIcon(Start.class.getResource("../image/c_30.png")).getImage();
@@ -67,7 +67,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 	private Image mon2 = new ImageIcon(Game.class.getResource("../Image/monster2.png")).getImage();
 	private Image mon3 = new ImageIcon(Game.class.getResource("../Image/monster3.png")).getImage();
 	private Image temp;
-	public long startTime=2*60*1000+System.currentTimeMillis();
+	private long startTime=2*60*1000+System.currentTimeMillis();
 	private final java.text.SimpleDateFormat timerFormat = new java.text.SimpleDateFormat("mm : ss : SSS");
 	private long elapsed = 1;
 	private int loop; // control monster's missile loop
@@ -82,6 +82,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		this.win = win;
 		this.user = p;
 		this.game = game;
+		
 		score = 0; // initial score
 		loop = 80; // initial loop for monster's missile loop
 		did = 0; // initial did for monster's missile loop's change
@@ -208,7 +209,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 	}
 
-	public void MissileProcess() {
+	private void MissileProcess() {
 		if (KeySpace) {
 			AInfo = new Missile(user.getX() + 10, user.getY() + 15);
 			Aplus_List.add(AInfo);
@@ -237,22 +238,23 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 	}
 
-	public void Enemy_MissileProcess() { // Enemy Missile Process
+	private void Enemy_MissileProcess() { // Enemy Missile Process
 		if (cnt % loop == 0) {
 			for (int i = 0; i < Mon_List.size() && Mon_List.get(i).getX() <= 550; i++) { // 미사일이 몬스터 등장한 후 나옴
+				System.out.println("Missile speed is " + Missile_speed) ;
 				switch (Mon_List.get(i).getDamage() / 10) {
 				case 3:
-					FInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
+					FInfo = new M_Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30, Missile_speed);
 					Fplus_List.add(FInfo);
 
 					break;
 				case 2:
-					DInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
+					DInfo = new M_Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30, Missile_speed);
 					Dplus_List.add(DInfo);
 
 					break;
 				case 1:
-					CInfo = new Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30);
+					CInfo = new M_Missile(Mon_List.get(i).getX() - 10, Mon_List.get(i).getY() + 30, Missile_speed);
 					Cplus_List.add(CInfo);
 
 					break;
@@ -270,9 +272,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 
 	public void Draw_Enemy_Missile(Graphics pan) { // Draw Enemy's Missile
 		for (int j = 0; j < Fplus_List.size(); ++j) {
-			FInfo = (Missile) (Fplus_List.get(j));
+			FInfo = (M_Missile) (Fplus_List.get(j));
 			pan.drawImage(Fplus, FInfo.getX(), FInfo.getY(), win);
-			FInfo.enemy_move(Missile_speed);
+			FInfo.move() ;
 			if (Crash(FInfo.getX(), FInfo.getY(), user, user, 40, 50)) {
 				System.out.println("user - f");
 				user.attack(20);
@@ -285,9 +287,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 
 		for (int j = 0; j < Dplus_List.size(); ++j) {
-			DInfo = (Missile) (Dplus_List.get(j));
+			DInfo = (M_Missile) (Dplus_List.get(j));
 			pan.drawImage(Dplus, DInfo.getX(), DInfo.getY(), win);
-			DInfo.enemy_move(Missile_speed);
+			DInfo.move();
 			if (Crash(DInfo.getX(), DInfo.getY(), user, user, 35, 50)) {
 				System.out.println("user - d");
 				user.attack(15);
@@ -299,9 +301,9 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 
 		for (int j = 0; j < Cplus_List.size(); ++j) {
-			CInfo = (Missile) (Cplus_List.get(j));
+			CInfo = (M_Missile) (Cplus_List.get(j));
 			pan.drawImage(Cplus, CInfo.getX(), CInfo.getY(), win);
-			CInfo.enemy_move(Missile_speed);
+			CInfo.move();
 			if (Crash(CInfo.getX(), CInfo.getY(), user, user, 30, 50)) {
 				System.out.println("user - c");
 				user.attack(10);
@@ -313,7 +315,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 	}
 
-	public void show_status(long elapsed) {
+	private void show_status(long elapsed) {
 		
 		status[0].setText("HP : " + user.getHp());
 		if (user.getHp() <= 100) {
@@ -321,7 +323,18 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 		status[1].setText("Score : " + score);
 		status[2].setText("Time : " + timerFormat.format(elapsed));
-		System.out.println(elapsed/1000);
+		
+		if(elapsed/1000 == 60 && check)
+		{
+			Missile_speed += 1 ;
+			check = false ;
+		}
+		if(elapsed/1000 == 30 && check)
+		{
+			Missile_speed += 1 ;
+			check = false ;
+		}
+		if(!(elapsed/1000 == 60) && !(elapsed/1000 == 30)) check = true ;
 		
 		if(elapsed <= 0) {
 			elapsed = 0;
@@ -337,7 +350,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 		}
 	}
 
-	public Image GetImage() // Using timer
+	private Image GetImage()
 	{
 		ran = rand.nextInt(50) + 1;
 		if (rand.nextInt(50) + 1 < ran)
@@ -348,7 +361,7 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 
 	}
 
-	public void MonsterProcess() {
+	private void MonsterProcess() {
 		for (int i = 0; i < Mon_List.size(); ++i) {
 			mon = (Monster) (Mon_List.get(i));
 			mon.setX(mon.getX() - 2 - mon.getSpeed());
@@ -413,7 +426,6 @@ public class RunGame extends JFrame implements Runnable, KeyListener {
 
 	}
 
-//	// 誘몄궗�씪, 媛앹껜(紐ъ뒪�꽣, �쑀��) 
 	private boolean Crash(int GradeX, int GradeY, Basic character, Basic attackChar, int range, int size) {
 		if (MatchingPoint(GradeX, GradeY, character.getX(), character.getY(), 30, size))
 			return true;
